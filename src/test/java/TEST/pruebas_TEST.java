@@ -19,6 +19,8 @@ import ws.Aduana;
  */
 public class pruebas_TEST {
     
+    Aduana request;
+    
     public pruebas_TEST() {
     }
     
@@ -43,9 +45,9 @@ public class pruebas_TEST {
     //
     // @Test
     // publi void hello() {}
-    
-    Aduana n= new Aduana();
-    String p= n.calcular_Costo_Aduana("", 12);
-    assert("",p);
-    
+     @Test
+    public void prueba_aduana(){
+    String p= this.request.calcular_Costo_Aduana("", 12);
+    assertEquals("",p);
+    }
 }

@@ -21,7 +21,7 @@ public class Aduana {
      */
 @WebMethod(operationName = "calcular_Costo_Aduana")
     public String calcular_Costo_Aduana(@WebParam(name = "linea") String linea,
-                                        @WebParam(name = "modelo") int modelo) {
+                                        @WebParam(name = "modelo") Integer modelo) {
         
         String costo_Aduana = "";
         
