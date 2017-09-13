@@ -18,7 +18,7 @@ public class Envio {
 
 
 @WebMethod(operationName = "cargar_Vehiculos")
-    public String cargar_Vehiculos(@WebParam(name = "solicitud_catalogo") int solicitud_catalogo) {
+    public String cargar_Vehiculos(@WebParam(name = "solicitud_catalogo") Integer solicitud_catalogo) {
         
         String catalogo = "";
         
@@ -26,7 +26,7 @@ public class Envio {
     }
     
 @WebMethod(operationName = "calcular_costo_viaje")
-    public double calcular_costo_viaje(@WebParam(name = "viaje") int viaje,
+    public double calcular_costo_viaje(@WebParam(name = "viaje") Integer viaje,
                                         @WebParam(name = "c") double costo) {
         
         double costo_viaje = 0;
@@ -36,8 +36,8 @@ public class Envio {
     
   
 @WebMethod(operationName = "guardar_Transferencia")
-    public boolean guardar_Transferencia(@WebParam(name = "id_transferencia") int id_transferencia,
-                                        @WebParam(name = "monto") int monto) {
+    public boolean guardar_Transferencia(@WebParam(name = "id_transferencia") Integer id_transferencia,
+                                        @WebParam(name = "monto") Integer monto) {
         
         boolean respuesta = false;
         

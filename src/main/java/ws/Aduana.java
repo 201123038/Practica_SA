@@ -23,14 +23,15 @@ public class Aduana {
     public String calcular_Costo_Aduana(@WebParam(name = "linea") String linea,
                                         @WebParam(name = "modelo") Integer modelo) {
         
-        String costo_Aduana = "";
+       // String costo_Aduana = "respuesta";
+        String respuesta = "";
         
-        return costo_Aduana;
+        return respuesta;
     }
     
 @WebMethod(operationName = "guardar_Id_Transferencia")
-    public boolean guardar_Id_Transferencia(@WebParam(name = "id_Transferencia") int id_Transferencia,
-                                        @WebParam(name = " monto_Compra") int  monto_Compra) {
+    public boolean guardar_Id_Transferencia(@WebParam(name = "id_Transferencia") Integer id_Transferencia,
+                                        @WebParam(name = " monto_Compra") Integer  monto_Compra) {
         
         boolean respuesta = false;
         

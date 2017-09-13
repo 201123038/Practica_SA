@@ -57,11 +57,11 @@ public class Importadora {
     
      @WebMethod(operationName = "comprar_Vehículo")
     public String comprar_Vehículo(
-            @WebParam(name = "id_Cliente") int id_Cliente,
+            @WebParam(name = "id_Cliente") Integer id_Cliente,
             @WebParam(name = "no_Tarjeta") String no_Tarjeta,
-            @WebParam(name = "id_Vehiculo") int id_Vehiculo
+            @WebParam(name = "id_Vehiculo") Integer id_Vehiculo
     ) {
-        int numero_Factura=0;
+        Integer numero_Factura=0;
         double impuesto_Sat=0;
         double impuesto_Aduana=0;
         double precio_Envio=0;

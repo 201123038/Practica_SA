@@ -29,7 +29,7 @@ public class Sat {
     
     @WebMethod(operationName = "registro_Id_Compra")
     public boolean registro_Id_Compra(
-            @WebParam(name = "id_Transferencia ") int id_Transferencia,
+            @WebParam(name = "id_Transferencia ") Integer id_Transferencia,
             @WebParam(name = "monto_Compra ") double monto_Compra) {
         
         boolean respuesta=false;
@@ -39,35 +39,35 @@ public class Sat {
     }
     
     @WebMethod(operationName = "guardar_Manifiesto")
-    public int guardar_Manifiesto(
+    public Integer guardar_Manifiesto(
             @WebParam(name = "nombre_Cliente") String nombre_Cliente) {
         
-        int numero_Manifiesto=0;
+        Integer numero_Manifiesto=0;
         
         return numero_Manifiesto;
     }
     
     @WebMethod(operationName = "guardar_Declaracion")
-    public int guardar_Declaracion(
+    public Integer guardar_Declaracion(
             @WebParam(name = "name") String entrada) {
  
         //entradas JSON
         
-        int numero_Declaracion=0;
+        Integer numero_Declaracion=0;
         
         return numero_Declaracion;
     }
     
     @WebMethod(operationName = "Generar_manifiesto")
-    public int Generar_manifiesto(
-            @WebParam(name = "codigo_Agende") int codigo_Agende,
-            @WebParam(name = "factura") int factura,
-            @WebParam(name = "doc_Transporte") int doc_Transporte,
-            @WebParam(name = "titulo_Propiedad") int titulo_Propiedad,
-            @WebParam(name = "tarjeta_Circulacion") int tarjeta_Circulacion,
+    public Integer Generar_manifiesto(
+            @WebParam(name = "codigo_Agende") Integer codigo_Agende,
+            @WebParam(name = "factura") Integer factura,
+            @WebParam(name = "doc_Transporte") Integer doc_Transporte,
+            @WebParam(name = "titulo_Propiedad") Integer titulo_Propiedad,
+            @WebParam(name = "tarjeta_Circulacion") Integer tarjeta_Circulacion,
             @WebParam(name = "declaracion_Aduanera") double declaracion_Aduanera) {
         
-        int numero_Manifiesto=0;
+        Integer numero_Manifiesto=0;
         
         return numero_Manifiesto;
     }
@@ -77,15 +77,15 @@ public class Sat {
             @WebParam(name = "tipo") String tipo,
             @WebParam(name = "marca") String marca,
             @WebParam(name = "linea") String linea,
-            @WebParam(name = "centimetros") int centimetros,
-            @WebParam(name = "cilindraje") int cilindraje,
-            @WebParam(name = "puertas") int puertas,
-            @WebParam(name = "asientos") int asientos,
-            @WebParam(name = "modelo") int modelo) {
+            @WebParam(name = "centimetros") Integer centimetros,
+            @WebParam(name = "cilindraje") Integer cilindraje,
+            @WebParam(name = "puertas") Integer puertas,
+            @WebParam(name = "asientos") Integer asientos,
+            @WebParam(name = "modelo") Integer modelo) {
         
         //preliminar
-        int monto_impuesto=0;
-        int cod_interno=0;
+        Integer monto_impuesto=0;
+        Integer cod_Integererno=0;
 
         String salida="";//JSON
         
