@@ -47,6 +47,6 @@ public class AduanaTest {
         System.out.println("guardar_Id_Transferencia");
         Aduana instance = new Aduana();
         boolean result = instance.guardar_Id_Transferencia(123, 123);
-        assertEquals(false, result);
+        assertEquals(true, result);
     }
     }
