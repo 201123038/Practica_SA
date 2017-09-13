@@ -34,14 +34,9 @@ public class ImportadoraTest {
     @Test
     public void testValidar_Sesion() {
         System.out.println("validar_Sesion");
-        String username = "";
-        String password = "";
         Importadora instance = new Importadora();
-        Boolean expResult = null;
-        Boolean result = instance.validar_Sesion(username, password);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Boolean result = instance.validar_Sesion("prueba", "prueba");
+        assertEquals(false, result);
     }
 
     /**
@@ -50,16 +45,9 @@ public class ImportadoraTest {
     @Test
     public void testCrear_Cuenta() {
         System.out.println("crear_Cuenta");
-        String nombre = "";
-        String username = "";
-        String password = "";
-        String no_Tarjeta = "";
         Importadora instance = new Importadora();
-        Boolean expResult = null;
-        Boolean result = instance.crear_Cuenta(nombre, username, password, no_Tarjeta);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Boolean result = instance.crear_Cuenta("prueba", "prueba", "prueba", "prueba");
+        assertEquals(false, result);
     }
 
     /**
@@ -69,11 +57,8 @@ public class ImportadoraTest {
     public void testSolicitar_Catalogo_Vehiculos() {
         System.out.println("solicitar_Catalogo_Vehiculos");
         Importadora instance = new Importadora();
-        String expResult = "";
         String result = instance.solicitar_Catalogo_Vehiculos();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("", result);
     }
 
     /**
@@ -82,31 +67,19 @@ public class ImportadoraTest {
     @Test
     public void testCotizar_Vehiculo() {
         System.out.println("cotizar_Vehiculo");
-        String linea = "";
-        String modelo = "";
         Importadora instance = new Importadora();
-        String expResult = "";
-        String result = instance.cotizar_Vehiculo(linea, modelo);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String result = instance.cotizar_Vehiculo("prueba", "prueba");
+        assertEquals("", result);
     }
 
     /**
-     * Test of comprar_Vehiculo method, of class Importadora.
+     * Test of comprar_Vehículo method, of class Importadora.
      */
     @Test
     public void testComprar_Vehiculo() {
         System.out.println("comprar_Vehiculo");
-        Integer id_Cliente = null;
-        String no_Tarjeta = "";
-        Integer id_Vehiculo = null;
         Importadora instance = new Importadora();
-        String expResult = "";
-        String result = instance.comprar_Vehiculo(id_Cliente, no_Tarjeta, id_Vehiculo);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String result = instance.comprar_Vehiculo(123,"prueba",123);
     }
     
 }

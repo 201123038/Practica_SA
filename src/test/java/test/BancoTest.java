@@ -28,21 +28,16 @@ public class BancoTest {
     public static void tearDownClass() {
     }
 
+
     /**
      * Test of transferencia_cuenta method, of class Banco.
      */
     @Test
     public void testTransferencia_cuenta() {
         System.out.println("transferencia_cuenta");
-        Integer cuenta_origen = null;
-        Integer cuenta_destino = null;
-        Integer monto = null;
         Banco instance = new Banco();
-        boolean expResult = false;
-        boolean result = instance.transferencia_cuenta(cuenta_origen, cuenta_destino, monto);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        boolean result = instance.transferencia_cuenta(123, 123, 123);
+        assertEquals(false, result);
     }
-    
+        
 }

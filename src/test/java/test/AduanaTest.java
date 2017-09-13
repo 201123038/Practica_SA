@@ -34,15 +34,10 @@ public class AduanaTest {
     @Test
     public void testCalcular_Costo_Aduana() {
         System.out.println("calcular_Costo_Aduana");
-        String linea = "";
-        Integer modelo = null;
         Aduana instance = new Aduana();
-        String expResult = "";
-        String result = instance.calcular_Costo_Aduana(linea, modelo);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        String result = instance.calcular_Costo_Aduana("linea", 123);
+        assertEquals("", result);
+        }
 
     /**
      * Test of guardar_Id_Transferencia method, of class Aduana.
@@ -50,14 +45,8 @@ public class AduanaTest {
     @Test
     public void testGuardar_Id_Transferencia() {
         System.out.println("guardar_Id_Transferencia");
-        Integer id_Transferencia = null;
-        Integer monto_Compra = null;
         Aduana instance = new Aduana();
-        boolean expResult = false;
-        boolean result = instance.guardar_Id_Transferencia(id_Transferencia, monto_Compra);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        boolean result = instance.guardar_Id_Transferencia(123, 123);
+        assertEquals(false, result);
     }
-    
-}
+    }
