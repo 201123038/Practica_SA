@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ws;
+package test;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import ws.Aduana;
 
 /**
  *
@@ -33,9 +34,14 @@ public class AduanaTest {
     @Test
     public void testCalcular_Costo_Aduana() {
         System.out.println("calcular_Costo_Aduana");
+        String linea = "";
+        Integer modelo = null;
         Aduana instance = new Aduana();
-        String result = instance.calcular_Costo_Aduana("", 123);
-        assertEquals("", result);
+        String expResult = "";
+        String result = instance.calcular_Costo_Aduana(linea, modelo);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**
@@ -44,9 +50,14 @@ public class AduanaTest {
     @Test
     public void testGuardar_Id_Transferencia() {
         System.out.println("guardar_Id_Transferencia");
+        Integer id_Transferencia = null;
+        Integer monto_Compra = null;
         Aduana instance = new Aduana();
-        boolean result = instance.guardar_Id_Transferencia(123, 123);
-        assertEquals(false, result);
+        boolean expResult = false;
+        boolean result = instance.guardar_Id_Transferencia(id_Transferencia, monto_Compra);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
     
 }

@@ -56,7 +56,7 @@ public class Importadora {
     }
     
      @WebMethod(operationName = "comprar_Vehículo")
-    public String comprar_Vehículo(
+    public String comprar_Vehiculo(
             @WebParam(name = "id_Cliente") Integer id_Cliente,
             @WebParam(name = "no_Tarjeta") String no_Tarjeta,
             @WebParam(name = "id_Vehiculo") Integer id_Vehiculo
