@@ -35,8 +35,8 @@ public class ImportadoraTest {
     public void testValidar_Sesion() {
         System.out.println("validar_Sesion");
         Importadora instance = new Importadora();
-        Boolean result = instance.validar_Sesion("prueba", "prueba");
-        assertEquals(false, result);
+        String result = instance.validar_Sesion("prueba", "prueba");
+        assertEquals("", result);
     }
 
     /**
@@ -46,8 +46,8 @@ public class ImportadoraTest {
     public void testCrear_Cuenta() {
         System.out.println("crear_Cuenta");
         Importadora instance = new Importadora();
-        Boolean result = instance.crear_Cuenta("prueba", "prueba", "prueba", "prueba");
-        assertEquals(false, result);
+        String result = instance.crear_Cuenta("prueba", "prueba", "prueba", "prueba");
+        assertEquals("", result);
     }
 
     /**
