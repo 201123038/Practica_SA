@@ -68,6 +68,9 @@ public class Importadora {
                                    @WebParam(name = "modelo") String modelo) {
         String listado_Cotizaciones ="";        
         //JSON catalogo cotizaciones de bd
+        String id_Vehiculo="", marca ="", pais_Origen="",precio_Vehiculo="",status="",descripcion="", precio_envio="",sat="", aduana="", iva="", isr="";
+        
+        listado_Cotizaciones="{ \"precio_Vehiculo\":"+precio_Vehiculo+", \"precio_Envio\":"+precio_envio+", \"impuesto_Sat\":"+sat+", \"impuesto_Aduana\":"+aduana+", \"iva\":"+iva+", \"isr\":"+isr+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
         return listado_Cotizaciones;
     }
     
