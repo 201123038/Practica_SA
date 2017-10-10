@@ -18,9 +18,18 @@ public class Importadora {
 
     
     @WebMethod(operationName = "validar_Sesion")
-    public Boolean validar_Sesion(@WebParam(name = "username") String username,
+    public String validar_Sesion(@WebParam(name = "username") String username,
                                   @WebParam(name = "password") String password) {
-        Boolean respuesta = false;
+        String respuesta = "";
+        //llamar a bd el nombre
+        
+        String nombre="",no_tarjeta="";
+        if(!nombre.equals("")){
+            respuesta="{  \"nombre\":\""+nombre+"\",  \"no_tarjeta\":\""+no_tarjeta+"\",  \"status\":0,  \"descripcion\":\"validacion correcta\" }";
+        
+        }else{
+           respuesta="{  \"nombre\":\"\",  \"no_tarjeta\":\"\",  \"status\":1,  \"descripcion\":\"usuario o password no validos\" }";
+        }
 
         //verificar en bd
 
@@ -28,22 +37,29 @@ public class Importadora {
     }
     
     @WebMethod(operationName = "crear_Cuenta")
-    public Boolean crear_Cuenta(
+    public String crear_Cuenta(
             @WebParam(name = "nombre") String nombre,
             @WebParam(name = "username") String username,
             @WebParam(name = "password") String password,
             @WebParam(name = "no_Tarjeta") String no_Tarjeta) 
     {
-        Boolean respuesta = false;
+        String respuesta = "";
+        boolean bandera=false;
         //agregar a bd
+        if(bandera==true)
+            respuesta="{  \"status\":0,  \"descripcion\":\"usuario creado exitosamente\" }";
+        else
+            //si existe en vd
+            respuesta="{  \"status\":1,  \"descripcion\":\"username ya existe\" }";
         
         return respuesta;
     }
     
     @WebMethod(operationName = "solicitar_Catalogo_Vehiculos")
     public String solicitar_Catalogo_Vehiculos() {
-        String listado_Vehiculos="";
+        String listado_Vehiculos="",preciov="",precioe="",impsat="",impad="",iva="",isr="";
        //JSON catalogo de bd 
+       listado_Vehiculos=" \"precio_Vehiculo\":"+preciov+", \"precio_Envio\":"+precioe+", \"impuesto_Sat\":"+impsat+", \"impuesto_Aduana\":"+impad+", \"iva\":"+iva+", \"isr\":"+isr+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
         return listado_Vehiculos;
     }
     
