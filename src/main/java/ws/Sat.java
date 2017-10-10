@@ -18,45 +18,94 @@ public class Sat {
 
 
     @WebMethod(operationName = "calcular_Impuesto")
-    public double calcular_Impuesto(
+    public String calcular_Impuesto(
+            @WebParam(name = "marca") String marca,
             @WebParam(name = "linea") String linea,
             @WebParam(name = "modelo") Integer modelo) {
         
-        double valor=0;
+        String respuesta="", valor="";
         
-        return valor;
-    }
-    
-    @WebMethod(operationName = "registro_Id_Compra")
-    public boolean registro_Id_Compra(
-            @WebParam(name = "id_Transferencia ") Integer id_Transferencia,
-            @WebParam(name = "monto_Compra ") double monto_Compra) {
+        respuesta="{" +
+        "\"valor\" : "+valor+"," +
+        "\"status\":0," +
+        "\"descripcion\":\"Exitoso\"\n" +
+        "}";
         
-        boolean respuesta=false;
         
         
         return respuesta;
     }
     
+    @WebMethod(operationName = "registro_Id_Compra")
+    public String registro_Id_Compra(
+            @WebParam(name = "id_Transferencia ") Integer id_Transferencia,
+            @WebParam(name = "monto_Compra ") double monto_Compra) {
+        
+        String respuesta="";
+        
+        //si todo bbien
+        
+        respuesta="{" +
+            "\"status\":0," +
+            "\"descripcion\":\"Exitoso\"" +
+            "}";
+        
+        //sino 
+        respuesta="{" +
+            "\"status\":1," +
+            "\"descripcion\":\"Tipo de dato incorrecto\"" +
+            "}";
+        
+        return respuesta;
+    }
+    
     @WebMethod(operationName = "guardar_Manifiesto")
-    public Integer guardar_Manifiesto(
-            @WebParam(name = "nombre_Cliente") String nombre_Cliente) {
+    public String guardar_Manifiesto(
+            @WebParam(name = "marca") String marca, 
+            @WebParam(name = "linea") String linea ,
+            @WebParam(name = "modelo") String modela ,
+            @WebParam(name = "fecha_Entrada") String fecha_Entrada ,
+            @WebParam(name = "pais_Origen") String pais_Origen)    
+    {
         
         Integer numero_Manifiesto=0;
+        String respuesta="";
         
-        return numero_Manifiesto;
+        respuesta="{" +
+        "\"num_Manifiesto\" : "+numero_Manifiesto+",\n" +
+        "\"status\":0," +
+        "\"descripcion\":\"Exitoso\"" +
+        "}";
+        
+        return respuesta;
     }
     
     @WebMethod(operationName = "guardar_Declaracion")
-    public Integer guardar_Declaracion(
-            @WebParam(name = "name") String entrada) {
+    public String guardar_Declaracion(
+            @WebParam(name = "marca") String marca,
+            @WebParam(name = "linea") String linea,
+            @WebParam(name = "modelo") String model,
+            @WebParam(name = "precio") String precio,
+            @WebParam(name = "name") String fecha_Declaracion
+    
+    ) {
  
         //entradas JSON
         
         Integer numero_Declaracion=0;
+        String respuesta="";
         
-        return numero_Declaracion;
+        respuesta="{\n" +
+        "\"num_declaracion\" : "+numero_Declaracion+"," +
+        "\"status\":0,\n" +
+        "\"descripcion\":\"Exitoso\"\n" +
+        "}";
+        
+        
+        return respuesta;
     }
+    /* saber que puchis
+    
     
     @WebMethod(operationName = "Generar_manifiesto")
     public Integer Generar_manifiesto(
@@ -91,5 +140,5 @@ public class Sat {
         
         return salida;
     }
-    
+    */
 }

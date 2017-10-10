@@ -20,21 +20,41 @@ public class Aduana {
      * This is a sample web service operation
      */
 @WebMethod(operationName = "calcular_Costo_Aduana")
-    public String calcular_Costo_Aduana(@WebParam(name = "linea") String linea,
-                                        @WebParam(name = "modelo") Integer modelo) {
+    public String calcular_Costo_Aduana(
+            @WebParam(name = "marca") String marca,
+            @WebParam(name = "linea") String linea,
+            @WebParam(name = "modelo") Integer modelo) {
         
-       // String costo_Aduana = "respuesta";
-        String respuesta = "";
+        String respuesta = "",costo_Aduana="",status="",descripcion="";
+        
+        respuesta="{" +
+        "\"costo_Aduana\" : "+costo_Aduana+",\n" +
+        "\"status\":0," +
+        "\"descripcion\":\"Exitoso\"" +
+        "}";
         
         return respuesta;
     }
     
 @WebMethod(operationName = "guardar_Id_Transferencia")
-    public boolean guardar_Id_Transferencia(@WebParam(name = "id_Transferencia") Integer id_Transferencia,
-                                        @WebParam(name = " monto_Compra") Integer  monto_Compra) {
+    public String guardar_Id_Transferencia(
+                                @WebParam(name = "id_Transferencia") Integer id_Transferencia,
+                                @WebParam(name = " monto_Compra") Integer  monto_Compra) {
         
-        boolean respuesta = false;
+        String respuesta = "";
+        //todo bien 
+        respuesta="{" +
+        "\"status\":0," +
+        "\"descripcion\":\"Exitoso\"" +
+        "}";
+
+        //sino
         
+        respuesta="{" +
+        "\"status\":1," +
+        "\"descripcion\":\"Código de transferencia ya utilizado\"" +
+        "}";
+
         return respuesta;
     }
  

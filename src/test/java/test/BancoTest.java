@@ -36,8 +36,8 @@ public class BancoTest {
     public void testTransferencia_cuenta() {
         System.out.println("transferencia_cuenta");
         Banco instance = new Banco();
-        boolean result = instance.transferencia_cuenta(123, 123, 123);
-        assertEquals(false, result);
+        String result = instance.transferencia_cuenta("123", "123", 123.0);
+        assertEquals("", result);
     }
         
 }

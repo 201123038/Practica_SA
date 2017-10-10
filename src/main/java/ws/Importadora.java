@@ -78,16 +78,25 @@ public class Importadora {
     public String comprar_Vehiculo(
             @WebParam(name = "id_Cliente") Integer id_Cliente,
             @WebParam(name = "no_Tarjeta") String no_Tarjeta,
-            @WebParam(name = "id_Vehiculo") Integer id_Vehiculo
+            @WebParam(name = "id_Vehiculo") Integer id_Vehiculo,
+            @WebParam(name = "precio_Vehiculo") Double precio_Vehiculo,
+            @WebParam(name = "precio_Envio") Double precio_Envio,
+            @WebParam(name = "impuesto_Sat") Double impuesto_Sat,
+            @WebParam(name = "impuesto_Aduana") Double impuesto_Aduana,
+            @WebParam(name = "iva") Double iva,
+            @WebParam(name = "isr") Double isr,
+            @WebParam(name = "pais_Origen") String  pais_Origen ,
+            @WebParam(name = "pais_Destino") String  pais_Destino
     ) {
-        Integer numero_Factura=0;
-        double impuesto_Sat=0;
-        double impuesto_Aduana=0;
-        double precio_Envio=0;
-        double precio_Vehiculo=0;
-        String respuesta="";//JSON
-
-        
+        Integer factura=0;
+        String respuesta="", serie="";//JSON
+            
+        respuesta="{\n" +
+                "\"serie\" : \""+serie+"\"," +
+                "\"numero_Factura\" : \""+factura+"\" ," +
+                "\"status\":0," +
+                "\"descripcion\":\"Exitoso\"" +
+                "}";
         
         return respuesta;
     }
