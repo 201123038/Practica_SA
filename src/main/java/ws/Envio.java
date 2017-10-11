@@ -63,7 +63,7 @@ public class Envio {
         respuesta="{" +
 "\"costo_viaje\" : "+costo_viaje+"," +
 "\"status\":0," +
-"\"descripcion\":\"Exitoso\"\n" +
+"\"descripcion\":\"Exitoso\"" +
 "}";
         //sino
         respuesta="{" +

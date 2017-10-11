@@ -28,7 +28,7 @@ public class Sat {
         respuesta="{" +
         "\"valor\" : "+valor+"," +
         "\"status\":0," +
-        "\"descripcion\":\"Exitoso\"\n" +
+        "\"descripcion\":\"Exitoso\"" +
         "}";
         
         
@@ -72,7 +72,7 @@ public class Sat {
         String respuesta="";
         
         respuesta="{" +
-        "\"num_Manifiesto\" : "+numero_Manifiesto+",\n" +
+        "\"num_Manifiesto\" : "+numero_Manifiesto+"," +
         "\"status\":0," +
         "\"descripcion\":\"Exitoso\"" +
         "}";
@@ -95,10 +95,10 @@ public class Sat {
         Integer numero_Declaracion=0;
         String respuesta="";
         
-        respuesta="{\n" +
+        respuesta="{" +
         "\"num_declaracion\" : "+numero_Declaracion+"," +
         "\"status\":0,\n" +
-        "\"descripcion\":\"Exitoso\"\n" +
+        "\"descripcion\":\"Exitoso\"" +
         "}";
         
         

@@ -28,7 +28,7 @@ public class Aduana {
         String respuesta = "",costo_Aduana="",status="",descripcion="";
         
         respuesta="{" +
-        "\"costo_Aduana\" : "+costo_Aduana+",\n" +
+        "\"costo_Aduana\" : "+costo_Aduana+"," +
         "\"status\":0," +
         "\"descripcion\":\"Exitoso\"" +
         "}";
