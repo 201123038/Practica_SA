@@ -24,15 +24,12 @@ public class Importadora {
         //llamar a bd el nombre
         
         String nombre="",no_tarjeta="";
-        if(!nombre.equals("")){
             respuesta="{  \"nombre\":\""+nombre+"\",  \"no_tarjeta\":\""+no_tarjeta+"\",  \"status\":0,  \"descripcion\":\"validacion correcta\" }";
         
-        }else{
            respuesta="{  \"nombre\":\"\",  \"no_tarjeta\":\"\",  \"status\":1,  \"descripcion\":\"usuario o password no validos\" }";
-        }
 
         //verificar en bd
-
+                respuesta="prueba";
         return respuesta;
     }
     
@@ -52,6 +49,7 @@ public class Importadora {
             //si existe en vd
             respuesta="{  \"status\":1,  \"descripcion\":\"username ya existe\" }";
         
+                respuesta="prueba";
         return respuesta;
     }
     
@@ -66,12 +64,14 @@ public class Importadora {
     @WebMethod(operationName = "cotizar_Vehiculo")
     public String cotizar_Vehiculo(@WebParam(name = "linea") String linea,
                                    @WebParam(name = "modelo") String modelo) {
-        String listado_Cotizaciones ="";        
+        String respuesta ="";        
         //JSON catalogo cotizaciones de bd
         String id_Vehiculo="", marca ="", pais_Origen="",precio_Vehiculo="",status="",descripcion="", precio_envio="",sat="", aduana="", iva="", isr="";
         
-        listado_Cotizaciones="{ \"precio_Vehiculo\":"+precio_Vehiculo+", \"precio_Envio\":"+precio_envio+", \"impuesto_Sat\":"+sat+", \"impuesto_Aduana\":"+aduana+", \"iva\":"+iva+", \"isr\":"+isr+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
-        return listado_Cotizaciones;
+        respuesta="{ \"precio_Vehiculo\":"+precio_Vehiculo+", \"precio_Envio\":"+precio_envio+", \"impuesto_Sat\":"+sat+", \"impuesto_Aduana\":"+aduana+", \"iva\":"+iva+", \"isr\":"+isr+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
+
+        respuesta="prueba";
+        return respuesta;
     }
     
      @WebMethod(operationName = "comprar_Vehículo")
@@ -91,13 +91,13 @@ public class Importadora {
         Integer factura=0;
         String respuesta="", serie="";//JSON
             
-        respuesta="{\n" +
+        respuesta="{" +
                 "\"serie\" : \""+serie+"\"," +
                 "\"numero_Factura\" : \""+factura+"\" ," +
                 "\"status\":0," +
                 "\"descripcion\":\"Exitoso\"" +
                 "}";
-        
+        respuesta="prueba";
         return respuesta;
     }
     

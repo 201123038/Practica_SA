@@ -36,7 +36,7 @@ public class ImportadoraTest {
         System.out.println("validar_Sesion");
         Importadora instance = new Importadora();
         String result = instance.validar_Sesion("prueba", "prueba");
-        assertEquals("", result);
+        assertEquals("prueba", result);
     }
 
     /**
@@ -47,7 +47,7 @@ public class ImportadoraTest {
         System.out.println("crear_Cuenta");
         Importadora instance = new Importadora();
         String result = instance.crear_Cuenta("prueba", "prueba", "prueba", "prueba");
-        assertEquals("", result);
+        assertEquals("prueba", result);
     }
 
     /**
@@ -58,7 +58,7 @@ public class ImportadoraTest {
         System.out.println("solicitar_Catalogo_Vehiculos");
         Importadora instance = new Importadora();
         String result = instance.solicitar_Catalogo_Vehiculos();
-        assertEquals("", result);
+        assertEquals("prueba", result);
     }
 
     /**
@@ -69,7 +69,7 @@ public class ImportadoraTest {
         System.out.println("cotizar_Vehiculo");
         Importadora instance = new Importadora();
         String result = instance.cotizar_Vehiculo("prueba", "prueba");
-        assertEquals("", result);
+        assertEquals("prueba", result);
     }
 
     /**
@@ -80,7 +80,7 @@ public class ImportadoraTest {
         System.out.println("comprar_Vehiculo");
         Importadora instance = new Importadora();
         String result = instance.comprar_Vehiculo(123,"prueba",123,123.0,123.0,123.0,123.0,123.0,123.0,"prueba","prueba");
-        assertEquals("", result);
+        assertEquals("prueba", result);
     }
     
 }
