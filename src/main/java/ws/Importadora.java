@@ -17,6 +17,26 @@ import javax.jws.WebParam;
 public class Importadora {
 
     
+    @WebMethod(operationName = "crear_Cuenta")
+    public String crear_Cuenta(
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "username") String username,
+            @WebParam(name = "password") String password,
+            @WebParam(name = "no_Tarjeta") String no_Tarjeta) 
+    {
+        String respuesta = "";
+        boolean bandera=false;
+        //agregar a bd
+        if(bandera==true)
+            respuesta="{  \"status\":0,  \"descripcion\":\"usuario creado exitosamente\" }";
+        else
+            //si existe en vd
+            respuesta="{  \"status\":1,  \"descripcion\":\"username ya existe\" }";
+        
+   
+        return respuesta;
+    }
+        
     @WebMethod(operationName = "validar_Sesion")
     public String validar_Sesion(@WebParam(name = "username") String username,
                                   @WebParam(name = "password") String password) {
@@ -34,27 +54,7 @@ public class Importadora {
         //verificar en bd
         return respuesta;
     }
-    
-    @WebMethod(operationName = "crear_Cuenta")
-    public String crear_Cuenta(
-            @WebParam(name = "nombre") String nombre,
-            @WebParam(name = "username") String username,
-            @WebParam(name = "password") String password,
-            @WebParam(name = "no_Tarjeta") String no_Tarjeta) 
-    {
-        String respuesta = "";
-        boolean bandera=false;
-        //agregar a bd
-        if(bandera==true)
-            respuesta="{  \"status\":0,  \"descripcion\":\"usuario creado exitosamente\" }";
-        else
-            //si existe en vd
-            respuesta="{  \"status\":1,  \"descripcion\":\"username ya existe\" }";
-        
-                respuesta="prueba";
-        return respuesta;
-    }
-    
+
     @WebMethod(operationName = "solicitar_Catalogo_Vehiculos")
     public String solicitar_Catalogo_Vehiculos() {
         String listado_Vehiculos="",preciov="",precioe="",impsat="",impad="",iva="",isr="";
@@ -66,11 +66,11 @@ public class Importadora {
     }
     
     @WebMethod(operationName = "cotizar_Vehiculo")
-    public String cotizar_Vehiculo(@WebParam(name = "linea") String linea,
-                                   @WebParam(name = "modelo") String modelo) {
+    public String cotizar_Vehiculo(@WebParam(name = "id_Vehiculo") Integer id_Vehiculo,
+                                   @WebParam(name = "pais_Destino") String pais_Destino) {
         String respuesta ="";        
         //JSON catalogo cotizaciones de bd
-        String id_Vehiculo="", marca ="", pais_Origen="",precio_Vehiculo="",status="",descripcion="", precio_envio="",sat="", aduana="", iva="", isr="";
+        String  marca ="", pais_Origen="",precio_Vehiculo="",status="",descripcion="", precio_envio="",sat="", aduana="", iva="", isr="";
         
         respuesta="{ \"precio_Vehiculo\":"+precio_Vehiculo+", \"precio_Envio\":"+precio_envio+", \"impuesto_Sat\":"+sat+", \"impuesto_Aduana\":"+aduana+", \"iva\":"+iva+", \"isr\":"+isr+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
 

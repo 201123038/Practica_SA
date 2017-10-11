@@ -69,7 +69,7 @@ public class ImportadoraTest {
     public void testCotizar_Vehiculo() {
         System.out.println("cotizar_Vehiculo");
         Importadora instance = new Importadora();
-        String result = instance.cotizar_Vehiculo("prueba", "prueba");
+        String result = instance.cotizar_Vehiculo(123, "prueba");
         assertEquals("prueba", result);
     }
 
