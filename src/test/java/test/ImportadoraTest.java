@@ -36,7 +36,8 @@ public class ImportadoraTest {
         System.out.println("validar_Sesion");
         Importadora instance = new Importadora();
         String result = instance.validar_Sesion("prueba", "prueba");
-        assertEquals("prueba", result);
+        assertEquals("respuesta=\"{  \\\"nombre\\\":\\\"\"prueba\"\\\",  \\\"no_tarjeta\\\":\\\"\"123\"\\\",  \\\"status\\\":0,  \\\"descripcion\\\":\\\"validacion correcta\\\" }\";" +
+"        ", result);
     }
 
     /**

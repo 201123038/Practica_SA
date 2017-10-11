@@ -24,12 +24,14 @@ public class Importadora {
         //llamar a bd el nombre
         
         String nombre="",no_tarjeta="";
-            respuesta="{  \"nombre\":\""+nombre+"\",  \"no_tarjeta\":\""+no_tarjeta+"\",  \"status\":0,  \"descripcion\":\"validacion correcta\" }";
+
+        respuesta="{  \"nombre\":\""+nombre+"\",  \"no_tarjeta\":\""+no_tarjeta+"\",  \"status\":0,  \"descripcion\":\"validacion correcta\" }";
         
            respuesta="{  \"nombre\":\"\",  \"no_tarjeta\":\"\",  \"status\":1,  \"descripcion\":\"usuario o password no validos\" }";
-
+        
+           respuesta="{  \"nombre\":\""+username+"\",  \"no_tarjeta\":\"123\",  \"status\":0,  \"descripcion\":\"validacion correcta\" }";
+        
         //verificar en bd
-                respuesta="prueba";
         return respuesta;
     }
     
