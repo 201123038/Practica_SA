@@ -64,6 +64,7 @@ public class Importadora {
            respuesta="{  \"nombre\":\"\",  \"no_tarjeta\":\"\",  \"status\":1,  \"descripcion\":\"usuario o password no validos\" }";
         
            respuesta="{  \"nombre\":\""+username+"\",  \"no_tarjeta\":\"123\",  \"status\":0,  \"descripcion\":\"validacion correcta\" }";
+        respuesta="prueba";
         
         //verificar en bd
         return respuesta;
@@ -117,6 +118,39 @@ public class Importadora {
                 "}";
         respuesta="prueba";
         return respuesta;
+    }
+    
+    public void conexion(){
+        try {
+			Class.forName("org.postgresql.Driver");
+
+		} catch (ClassNotFoundException e) {
+
+			System.out.println("Error!");
+			e.printStackTrace();
+
+		}
+
+		Connection connection = null;
+
+		try {
+
+			connection = DriverManager.getConnection(
+					"jdbc:postgresql://127.0.0.1:5432/importadora", "postgres",
+					"1234");
+
+		} catch (SQLException e) {
+
+			System.out.println("Error2");
+			e.printStackTrace();
+
+		}
+
+		if (connection != null) {
+			System.out.println("You made it, take control your database now!");
+		} else {
+			System.out.println("Failed to make connection!");
+		}
     }
     
     
