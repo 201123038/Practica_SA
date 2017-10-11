@@ -58,7 +58,9 @@ public class Importadora {
         String listado_Vehiculos="",preciov="",precioe="",impsat="",impad="",iva="",isr="";
        //JSON catalogo de bd 
        listado_Vehiculos=" \"precio_Vehiculo\":"+preciov+", \"precio_Envio\":"+precioe+", \"impuesto_Sat\":"+impsat+", \"impuesto_Aduana\":"+impad+", \"iva\":"+iva+", \"isr\":"+isr+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
-        return listado_Vehiculos;
+        
+        listado_Vehiculos="prueba";
+       return listado_Vehiculos;
     }
     
     @WebMethod(operationName = "cotizar_Vehiculo")
