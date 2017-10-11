@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package ws;
-
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.SQLException;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
