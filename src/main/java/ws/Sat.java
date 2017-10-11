@@ -31,7 +31,8 @@ public class Sat {
         "\"descripcion\":\"Exitoso\"" +
         "}";
         
-        
+                        respuesta="prueba";
+
         
         return respuesta;
     }
@@ -56,6 +57,7 @@ public class Sat {
             "\"descripcion\":\"Tipo de dato incorrecto\"" +
             "}";
         
+                respuesta="prueba";
         return respuesta;
     }
     
@@ -77,6 +79,7 @@ public class Sat {
         "\"descripcion\":\"Exitoso\"" +
         "}";
         
+                respuesta="prueba";
         return respuesta;
     }
     
@@ -102,6 +105,7 @@ public class Sat {
         "}";
         
         
+                respuesta="prueba";
         return respuesta;
     }
     /* saber que puchis

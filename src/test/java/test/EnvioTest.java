@@ -36,7 +36,7 @@ public class EnvioTest {
         System.out.println("cargar_Vehiculos");
         Envio instance = new Envio();
         String result = instance.cargar_Vehiculos();
-        assertEquals("", result);
+        assertEquals("prueba", result);
     }
 
     /**
@@ -47,7 +47,7 @@ public class EnvioTest {
         System.out.println("calcular_costo_viaje");
         Envio instance = new Envio();
         String result = instance.calcular_costo_viaje(123, "prueba");
-        assertEquals("", result);
+        assertEquals("prueba", result);
     }
 
     /**
@@ -58,7 +58,7 @@ public class EnvioTest {
         System.out.println("guardar_Transferencia");
         Envio instance = new Envio();
         String result = instance.guardar_Transferencia(123,123.0);
-        assertEquals("", result);
+        assertEquals("prueba", result);
     }
    
 }

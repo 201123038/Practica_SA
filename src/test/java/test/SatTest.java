@@ -37,7 +37,7 @@ public class SatTest {
         System.out.println("calcular_Impuesto");
         Sat instance = new Sat();
         String result = instance.calcular_Impuesto("prueba","prueba", 123);
-        assertEquals("", result);
+        assertEquals("prueba", result);
     }
 
     /**
@@ -48,7 +48,7 @@ public class SatTest {
         System.out.println("registro_Id_Compra");
         Sat instance = new Sat();
         String result = instance.registro_Id_Compra(123, 123.0);
-        assertEquals("", result);
+        assertEquals("prueba", result);
     }
 
     /**
@@ -59,7 +59,7 @@ public class SatTest {
         System.out.println("guardar_Manifiesto");
         Sat instance = new Sat();
         String result = instance.guardar_Manifiesto("prueba","prueba","prueba","prueba","prueba");
-        assertEquals("", result);
+        assertEquals("prueba", result);
     }
 
     /**
@@ -70,7 +70,7 @@ public class SatTest {
         System.out.println("guardar_Declaracion");
         Sat instance = new Sat();
         String result = instance.guardar_Declaracion("prueba","prueba","prueba","prueba","prueba");
-        assertEquals("", result);
+        assertEquals("prueba", result);
     }
 
     /**

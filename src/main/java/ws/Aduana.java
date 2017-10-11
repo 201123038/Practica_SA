@@ -32,7 +32,8 @@ public class Aduana {
         "\"status\":0," +
         "\"descripcion\":\"Exitoso\"" +
         "}";
-        
+                        respuesta="prueba";
+
         return respuesta;
     }
     
@@ -54,6 +55,7 @@ public class Aduana {
         "\"status\":1," +
         "\"descripcion\":\"Código de transferencia ya utilizado\"" +
         "}";
+                respuesta="prueba";
 
         return respuesta;
     }

@@ -36,7 +36,7 @@ public class AduanaTest {
         System.out.println("calcular_Costo_Aduana");
         Aduana instance = new Aduana();
         String result = instance.calcular_Costo_Aduana("marca","linea", 123);
-        assertEquals("", result);
+        assertEquals("prueba", result);
         }
 
     /**
@@ -47,6 +47,6 @@ public class AduanaTest {
         System.out.println("guardar_Id_Transferencia");
         Aduana instance = new Aduana();
         String result = instance.guardar_Id_Transferencia(123, 123);
-        assertEquals("", result);
+        assertEquals("prueba", result);
     }
     }

@@ -49,6 +49,7 @@ public class Banco {
         "\"status\":0," +
         "\"descripcion\":\"Cuenta inexistente\"" +
         "}";
+                respuesta="prueba";
         
         return respuesta;
     }

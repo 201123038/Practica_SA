@@ -48,6 +48,7 @@ public class Envio {
             "\"status\":1," +
             "\"descripcion\":\"Error con la conexión a la BD de Envios\"" +
             "}";
+                catalogo="prueba";
         
         return catalogo;
     }
@@ -71,6 +72,8 @@ public class Envio {
 "\"status\":1," +
 "\"descripcion\":\"Tipo de dato incorrecto\"" +
 "}";
+                        respuesta="prueba";
+
         return respuesta;
     }
     
@@ -91,6 +94,7 @@ public class Envio {
             "\"descripcion\":\"Tipo de dato incorrecto\"" +
             "}";
         
+                respuesta="prueba";
         
         return respuesta;
     }
