@@ -28,7 +28,19 @@ public class Importadora {
     {
         String respuesta = "";
         boolean bandera=false;
-        //agregar a bd
+       
+        try {
+
+                  Class.forName("org.postgresql.Driver");
+                  bandera=true;
+		} catch (ClassNotFoundException e) {
+
+                       bandera=false;     
+                    e.printStackTrace();
+		
+		}
+
+        
         if(bandera==true)
             respuesta="{  \"status\":0,  \"descripcion\":\"usuario creado exitosamente\" }";
         else
