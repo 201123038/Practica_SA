@@ -26,13 +26,20 @@ public class Sat {
 
     @WebMethod(operationName = "calcular_Impuesto")
     public String calcular_Impuesto(
-            @WebParam(name = "id_Vehiculo") Integer id_Vehiculo
-    ) {
+            @WebParam(name = "linea") String linea,
+            @WebParam(name = "marca") String marca,
+            @WebParam(name = "modelo") Integer modelo
+               ) {
         
         String respuesta="", valor="";
-        valor= impuestoSat(id_Vehiculo);
+        valor= impuestoSat(linea,marca,modelo);
+        Double v1=(Double.parseDouble(valor))/100;
+        Double imp=0.0;
+        
+        imp=v1+(1000/(2017-modelo+1))+1000;
+        
                 respuesta="{" +
-        "\"valor\" : "+valor+"," +
+        "\"valor\" : "+v1+"," +
         "\"status\":0," +
         "\"descripcion\":\"Exitoso\"" +
         "}";        
@@ -102,7 +109,7 @@ public class Sat {
         
         respuesta="{" +
         "\"num_declaracion\" : "+numero_Declaracion+"," +
-        "\"status\":0,\n" +
+        "\"status\":0," +
         "\"descripcion\":\"Exitoso\"" +
         "}";
         
@@ -112,7 +119,7 @@ public class Sat {
     }
     
     
-    String impuestoSat(Integer id){
+    String impuestoSat(String linea, String marca,Integer modelo){
         String respuesta="";
           try {
             Class.forName("org.postgresql.Driver");
@@ -124,19 +131,24 @@ public class Sat {
 
 		try {
 			conn = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/envios", "postgres",
+					"jdbc:postgresql://localhost:5432/sat", "postgres",
 					"1234");
                         stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery( "SELECT precio_Vehiculo FROM vehiculo where id_Vehiculo="+id+";" );
+                        ResultSet rs = stmt.executeQuery( "SELECT porcentaje FROM impuesto where linea='"+linea+"' and marca='"+marca+"';" );
                          while ( rs.next() ) {
-                            respuesta = rs.getString("precio_Vehiculo");
+                            respuesta = rs.getString("porcentaje");
+
                          }
-        
+                         
                          rs.close();
                          stmt.close();
-                         conn.close();                
+                         conn.close();
+                         
+                    if(!(respuesta.equals(""))){
+                           respuesta="1";
+                            }
 		} catch (SQLException e) {
-
+                    respuesta="1";    
                     System.out.println("Error2");
                     e.printStackTrace();
 		}

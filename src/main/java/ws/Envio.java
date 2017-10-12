@@ -43,7 +43,8 @@ public class Envio {
         
         double costo_viaje = 0;
         String respuesta="";
-        
+        costo_viaje=Double.parseDouble(envio(pais_Destino));   
+
         //si todo bien
         respuesta="{" +
 "\"costo_viaje\" : "+costo_viaje+"," +
@@ -51,12 +52,13 @@ public class Envio {
 "\"descripcion\":\"Exitoso\"" +
 "}";
         //sino
+        /*
         respuesta="{" +
 "\"costo_viaje\" : ," +
 "\"status\":1," +
 "\"descripcion\":\"Tipo de dato incorrecto\"" +
 "}";
-                        respuesta="prueba";
+*/
 
         return respuesta;
     }
@@ -144,7 +146,45 @@ public class Envio {
 
 	         return respuesta;
     }
-  
+      String envio(String pais){
+        String respuesta="";
+          try {
+            Class.forName("org.postgresql.Driver");
+	} catch (ClassNotFoundException e) {
+			System.out.println("Error!");
+			e.printStackTrace();
+	}
+
+
+		try {
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/envios", "postgres",
+					"1234");
+                        stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery( "SELECT envio FROM vehiculo where pais_Origen='"+pais+"';" );
+                         while ( rs.next() ) {
+                            respuesta = rs.getString("envio");
+                         }
+                         
+                         if(!(respuesta.equals(""))){
+                             respuesta="100";
+                         }
+                         rs.close();
+                         stmt.close();
+                         conn.close();
+                         
+                    if(!(respuesta.equals(""))){
+                           respuesta="1";
+                            }
+		} catch (SQLException e) {
+                    respuesta="1";    
+                    System.out.println("Error2");
+                    e.printStackTrace();
+		}
+        
+        return respuesta;
+    }
+ 
     
     
 }

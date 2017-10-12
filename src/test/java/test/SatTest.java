@@ -33,10 +33,10 @@ public class SatTest {
      * Test of calcular_Impuesto method, of class Sat.
      */
     @Test
-    public void testCalcular_Impuesto() {
+    public void testCalcular_Impuesto_Sat() {
         System.out.println("calcular_Impuesto");
         Sat instance = new Sat();
-        String result = instance.calcular_Impuesto(123);
+        String result = instance.calcular_Impuesto("prueba","prueba",123);
         assertEquals("prueba", result);
     }
 

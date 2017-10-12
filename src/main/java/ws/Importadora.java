@@ -66,22 +66,25 @@ public class Importadora {
        //JSON catalogo de bd ENVIOS
        listado_Vehiculos=" \"precio_Vehiculo\":"+preciov+", \"precio_Envio\":"+precioe+", \"impuesto_Sat\":"+impsat+", \"impuesto_Aduana\":"+impad+", \"iva\":"+iva+", \"isr\":"+isr+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
         
-        listado_Vehiculos="prueba";
        return listado_Vehiculos;
     }
     
     @WebMethod(operationName = "cotizar_Vehiculo")
     public String cotizar_Vehiculo(@WebParam(name = "id_Vehiculo") Integer id_Vehiculo,
                                    @WebParam(name = "pais_Destino") String pais_Destino) {
-        String respuesta ="";        
+        String respuesta ="",valor="";        
         
         //cotizacion tallen en bd importadora
-        
         //JSON catalogo cotizaciones de bd
-        String  marca ="", pais_Origen="",precio_Vehiculo="",status="",descripcion="", precio_envio="",sat="", aduana="", iva="", isr="";
+//        String  marca ="", pais_Origen="",precio_Vehiculo="",status="",descripcion="", precio_envio="",sat="", aduana="", iva="", isr="";
                      
-        
-        respuesta="{ \"precio_Vehiculo\":"+precio_Vehiculo+", \"precio_Envio\":"+precio_envio+", \"impuesto_Sat\":"+sat+", \"impuesto_Aduana\":"+aduana+", \"iva\":"+iva+", \"isr\":"+isr+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
+                        respuesta="{" +
+        "\"valor\" : 300," +
+        "\"status\":0," +
+        "\"descripcion\":\"Exitoso\"" +
+        "}";        
+
+//        respuesta="{ \"precio_Vehiculo\":"+precio_Vehiculo+", \"precio_Envio\":"+precio_envio+", \"impuesto_Sat\":"+sat+", \"impuesto_Aduana\":"+aduana+", \"iva\":"+iva+", \"isr\":"+isr+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
 
         return respuesta;
     }
@@ -109,7 +112,6 @@ public class Importadora {
                 "\"status\":0," +
                 "\"descripcion\":\"Exitoso\"" +
                 "}";
-        respuesta="prueba";
         return respuesta;
     }
     
@@ -171,19 +173,23 @@ public class Importadora {
                             nombre = rs.getString("nombre");
                             no_tarjeta = rs.getString("no_Tarjeta");
                          }
-                            respuesta="{  \"nombre\":\""+nombre+"\",  \"no_tarjeta\":\""+no_tarjeta+"\",  \"status\":0,  \"descripcion\":\"validacion correcta\" }";
-        
+                     
                          rs.close();
                          stmt.close();
                          conn.close();                
 		} catch (SQLException e) {
-                        respuesta="{  \"nombre\":\"\",  \"no_tarjeta\":\"\",  \"status\":1,  \"descripcion\":\"usuario o password no validos\" }";
-			System.out.println("Error2");
+                     System.out.println("Error2");
 			e.printStackTrace();
 		}
 
+                    if(!(no_tarjeta.equals(""))){
+                           respuesta="{  \"nombre\":\""+nombre+"\",  \"no_tarjeta\":\""+no_tarjeta+"\",  \"status\":0,  \"descripcion\":\"validacion correcta\" }";
+        
+                    }else{
+                       respuesta="{  \"nombre\":\"\",  \"no_tarjeta\":\"\",  \"status\":1,  \"descripcion\":\"usuario o password no validos\" }";
+			
+                    }
 	         return respuesta;
     }
-    
     
 }
