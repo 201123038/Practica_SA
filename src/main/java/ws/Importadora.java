@@ -7,6 +7,9 @@ package ws;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -18,6 +21,8 @@ import javax.jws.WebParam;
 @WebService(serviceName = "Importadora")
 public class Importadora {
 
+        Connection conn = null;
+         Statement stmt = null;
     
     @WebMethod(operationName = "crear_Cuenta")
     public String crear_Cuenta(
@@ -26,31 +31,22 @@ public class Importadora {
             @WebParam(name = "password") String password,
             @WebParam(name = "no_Tarjeta") String no_Tarjeta) 
     {
-        String respuesta = "";
         boolean bandera=false;
-       
-        try {
-
-                  Class.forName("org.postgresql.Driver");
-                  bandera=true;
-		} catch (ClassNotFoundException e) {
-
-                       bandera=false;     
-                    e.printStackTrace();
-		
-		}
-
-        
-        if(bandera==true)
-            respuesta="{  \"status\":0,  \"descripcion\":\"usuario creado exitosamente\" }";
-        else
-            //si existe en vd
-            respuesta="{  \"status\":1,  \"descripcion\":\"username ya existe\" }";
-        
-   
-        return respuesta;
-    }
-        
+                
+                String respuesta = "";
+                
+                bandera=conexion(nombre,username,password,no_Tarjeta);
+                
+                if(bandera==true)
+                    respuesta="{  \"status\":0,  \"descripcion\":\"usuario creado exitosamente\" }";
+                else
+                    //si existe en vd
+                    respuesta="{  \"status\":1,  \"descripcion\":\"username ya existe\" }";
+                
+                
+                return respuesta;
+            
+    }    
     @WebMethod(operationName = "validar_Sesion")
     public String validar_Sesion(@WebParam(name = "username") String username,
                                   @WebParam(name = "password") String password) {
@@ -120,7 +116,8 @@ public class Importadora {
         return respuesta;
     }
     
-    public void conexion(){
+    boolean conexion(String nombre, String user, String pass, String tarj) {
+        boolean bandera=false;
         try {
 			Class.forName("org.postgresql.Driver");
 
@@ -131,14 +128,20 @@ public class Importadora {
 
 		}
 
-		Connection connection = null;
 
 		try {
 
-			connection = DriverManager.getConnection(
-					"jdbc:postgresql://127.0.0.1:5432/importadora", "postgres",
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/importadora", "postgres",
 					"1234");
-
+                             bandera=true;
+                             stmt = conn.createStatement();
+                                String sql = "INSERT INTO public.cliente (nombre,username,pass,no_Tarjeta) "
+                                    + "VALUES ('"+nombre+"', '"+user+"', '"+pass+"', '"+tarj+"');";
+                                stmt.executeUpdate(sql);
+                            stmt.close();
+                              conn.commit();
+                              conn.close();                
 		} catch (SQLException e) {
 
 			System.out.println("Error2");
@@ -146,11 +149,7 @@ public class Importadora {
 
 		}
 
-		if (connection != null) {
-			System.out.println("You made it, take control your database now!");
-		} else {
-			System.out.println("Failed to make connection!");
-		}
+	         return bandera;
     }
     
     
