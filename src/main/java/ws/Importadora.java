@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import java.sql.ResultSet;
 
 /**
  *
@@ -51,25 +52,18 @@ public class Importadora {
     public String validar_Sesion(@WebParam(name = "username") String username,
                                   @WebParam(name = "password") String password) {
         String respuesta = "";
-        //llamar a bd el nombre
         
-        String nombre="",no_tarjeta="";
-
-        respuesta="{  \"nombre\":\""+nombre+"\",  \"no_tarjeta\":\""+no_tarjeta+"\",  \"status\":0,  \"descripcion\":\"validacion correcta\" }";
-        
-           respuesta="{  \"nombre\":\"\",  \"no_tarjeta\":\"\",  \"status\":1,  \"descripcion\":\"usuario o password no validos\" }";
-        
-           respuesta="{  \"nombre\":\""+username+"\",  \"no_tarjeta\":\"123\",  \"status\":0,  \"descripcion\":\"validacion correcta\" }";
-        respuesta="prueba";
+        respuesta=sesion(username,password);
         
         //verificar en bd
         return respuesta;
     }
 
+    //SE LLAMA A ENVIOS
     @WebMethod(operationName = "solicitar_Catalogo_Vehiculos")
     public String solicitar_Catalogo_Vehiculos() {
         String listado_Vehiculos="",preciov="",precioe="",impsat="",impad="",iva="",isr="";
-       //JSON catalogo de bd 
+       //JSON catalogo de bd ENVIOS
        listado_Vehiculos=" \"precio_Vehiculo\":"+preciov+", \"precio_Envio\":"+precioe+", \"impuesto_Sat\":"+impsat+", \"impuesto_Aduana\":"+impad+", \"iva\":"+iva+", \"isr\":"+isr+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
         
         listado_Vehiculos="prueba";
@@ -80,12 +74,15 @@ public class Importadora {
     public String cotizar_Vehiculo(@WebParam(name = "id_Vehiculo") Integer id_Vehiculo,
                                    @WebParam(name = "pais_Destino") String pais_Destino) {
         String respuesta ="";        
+        
+        //cotizacion tallen en bd importadora
+        
         //JSON catalogo cotizaciones de bd
         String  marca ="", pais_Origen="",precio_Vehiculo="",status="",descripcion="", precio_envio="",sat="", aduana="", iva="", isr="";
+                     
         
         respuesta="{ \"precio_Vehiculo\":"+precio_Vehiculo+", \"precio_Envio\":"+precio_envio+", \"impuesto_Sat\":"+sat+", \"impuesto_Aduana\":"+aduana+", \"iva\":"+iva+", \"isr\":"+isr+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
 
-        respuesta="prueba";
         return respuesta;
     }
     
@@ -150,6 +147,42 @@ public class Importadora {
 		}
 
 	         return bandera;
+    }
+    String sesion(String user, String pass) {
+        String respuesta="";
+        String nombre="",no_tarjeta="";
+
+        
+        try {
+            Class.forName("org.postgresql.Driver");
+	} catch (ClassNotFoundException e) {
+			System.out.println("Error!");
+			e.printStackTrace();
+	}
+
+
+		try {
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/importadora", "postgres",
+					"1234");
+                        stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery( "SELECT nombre,no_Tarjeta FROM cliente where username='"+user+"' and pass='"+pass+"';" );
+                         while ( rs.next() ) {
+                            nombre = rs.getString("nombre");
+                            no_tarjeta = rs.getString("no_Tarjeta");
+                         }
+                            respuesta="{  \"nombre\":\""+nombre+"\",  \"no_tarjeta\":\""+no_tarjeta+"\",  \"status\":0,  \"descripcion\":\"validacion correcta\" }";
+        
+                         rs.close();
+                         stmt.close();
+                         conn.close();                
+		} catch (SQLException e) {
+                        respuesta="{  \"nombre\":\"\",  \"no_tarjeta\":\"\",  \"status\":1,  \"descripcion\":\"usuario o password no validos\" }";
+			System.out.println("Error2");
+			e.printStackTrace();
+		}
+
+	         return respuesta;
     }
     
     

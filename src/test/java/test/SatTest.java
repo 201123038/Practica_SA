@@ -36,7 +36,7 @@ public class SatTest {
     public void testCalcular_Impuesto() {
         System.out.println("calcular_Impuesto");
         Sat instance = new Sat();
-        String result = instance.calcular_Impuesto("prueba","prueba", 123);
+        String result = instance.calcular_Impuesto(123);
         assertEquals("prueba", result);
     }
 

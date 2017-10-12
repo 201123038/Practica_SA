@@ -5,9 +5,16 @@
  */
 package ws;
 
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import java.sql.ResultSet;
 
 /**
  *
@@ -16,42 +23,19 @@ import javax.jws.WebParam;
 @WebService(serviceName = "Envio")
 public class Envio {
 
+        Connection conn = null;
+         Statement stmt = null;
 
 @WebMethod(operationName = "cargar_Vehiculos")
     public String cargar_Vehiculos(){        
         String catalogo = "";
-        String idv="", marca="", linea="", modelo="", paiso="",precio="";
         
-        //si hay vehiculos
-        
-        catalogo="{"+"\"vehiculos\":[ ";
-          //inicia for
-            catalogo+= "  {\"id_Vehiculo\":"+idv+","
-                + "\"marca\":\""+marca+"\", "
-                + "\"linea\":\""+linea+"\","
-                + "\"modelo\":"+modelo+","
-                + "\"pais_Origen\":\""+paiso+"\","
-                + "\"precio_Vehiculo\":"+precio+"},";         
-                idv="";marca=""; linea=""; modelo=""; paiso="";precio="";
+        catalogo=vehiculos();
                 
-          //termina for
-             catalogo+="]," +
-                "\"status\":0," +
-                "\"descripcion\":\"Exitoso\"" +
-                "}";
-        catalogo.replace("},]", "}]");
-        
-        //sino
-        catalogo="{" +
-            "\"vehiculos\":[ " +
-            "]," +
-            "\"status\":1," +
-            "\"descripcion\":\"Error con la conexión a la BD de Envios\"" +
-            "}";
-                catalogo="prueba";
-        
         return catalogo;
     }
+
+
     
 @WebMethod(operationName = "calcular_costo_viaje")
     public String calcular_costo_viaje(@WebParam(name = "id_Vehiculo") Integer id_Vehiculo,
@@ -99,6 +83,67 @@ public class Envio {
         return respuesta;
     }
     
+  
+    
+    
+      String vehiculos() {
+          String catalogo="",idv="", marca="", linea="", modelo="", paiso="",precio="", respuesta="";
+                try {
+                    Class.forName("org.postgresql.Driver");
+                } catch (ClassNotFoundException e) {
+                                System.out.println("Error!");
+                                e.printStackTrace();
+                }
+
+		try {
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/envios", "postgres",
+					"1234");
+                        stmt = conn.createStatement();
+                        catalogo="{"+"\"vehiculos\":[ ";
+
+                        ResultSet rs = stmt.executeQuery( "SELECT * FROM vehiculo; ");
+                         while ( rs.next() ) {
+                            idv = rs.getString("id_Vehiculo");
+                            marca = rs.getString("marca");
+                            marca = rs.getString("linea");
+                            marca = rs.getString("modelo");
+                            marca = rs.getString("pais_Origen");
+                            marca = rs.getString("precio_Vehiculo");
+
+                        catalogo+= "  {\"id_Vehiculo\":"+idv+","
+                            + "\"marca\":\""+marca+"\", "
+                            + "\"linea\":\""+linea+"\","
+                            + "\"modelo\":"+modelo+","
+                            + "\"pais_Origen\":\""+paiso+"\","
+                            + "\"precio_Vehiculo\":"+precio+"},";         
+                            idv="";marca=""; linea=""; modelo=""; paiso="";precio="";
+        
+                         } 
+                        catalogo+="]," +
+                                "\"status\":0," +
+                                "\"descripcion\":\"Exitoso\"" +
+                                "}";
+                        catalogo.replace("},]", "}]");
+                         
+                         rs.close();
+                         stmt.close();
+                         conn.close();                
+		} catch (SQLException e) {
+
+                            //sino
+                     catalogo="{" +
+                         "\"vehiculos\":[ " +
+                         "]," +
+                         "\"status\":1," +
+                         "\"descripcion\":\"Error con la conexión a la BD de Envios\"" +
+                         "}";
+                    System.out.println("Error2");
+			e.printStackTrace();
+		}
+
+	         return respuesta;
+    }
   
     
     

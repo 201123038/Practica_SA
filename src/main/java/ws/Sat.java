@@ -5,6 +5,11 @@
  */
 package ws;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -16,24 +21,21 @@ import javax.jws.WebParam;
 @WebService(serviceName = "Sat")
 public class Sat {
 
+        Connection conn = null;
+         Statement stmt = null;
 
     @WebMethod(operationName = "calcular_Impuesto")
     public String calcular_Impuesto(
-            @WebParam(name = "marca") String marca,
-            @WebParam(name = "linea") String linea,
-            @WebParam(name = "modelo") Integer modelo) {
+            @WebParam(name = "id_Vehiculo") Integer id_Vehiculo
+    ) {
         
         String respuesta="", valor="";
-        
-        respuesta="{" +
+        valor= impuestoSat(id_Vehiculo);
+                respuesta="{" +
         "\"valor\" : "+valor+"," +
         "\"status\":0," +
         "\"descripcion\":\"Exitoso\"" +
-        "}";
-        
-                        respuesta="prueba";
-
-        
+        "}";        
         return respuesta;
     }
     
@@ -108,6 +110,40 @@ public class Sat {
                 respuesta="prueba";
         return respuesta;
     }
+    
+    
+    String impuestoSat(Integer id){
+        String respuesta="";
+          try {
+            Class.forName("org.postgresql.Driver");
+	} catch (ClassNotFoundException e) {
+			System.out.println("Error!");
+			e.printStackTrace();
+	}
+
+
+		try {
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/envios", "postgres",
+					"1234");
+                        stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery( "SELECT precio_Vehiculo FROM vehiculo where id_Vehiculo="+id+";" );
+                         while ( rs.next() ) {
+                            respuesta = rs.getString("precio_Vehiculo");
+                         }
+        
+                         rs.close();
+                         stmt.close();
+                         conn.close();                
+		} catch (SQLException e) {
+
+                    System.out.println("Error2");
+                    e.printStackTrace();
+		}
+        
+        return respuesta;
+    }
+    
     /* saber que puchis
     
     
