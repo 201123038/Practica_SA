@@ -156,7 +156,7 @@ public class Sat {
         return respuesta;
     }
     
-    /* saber que puchis
+    /* saber que puchis sepa
     
     
     @WebMethod(operationName = "Generar_manifiesto")
