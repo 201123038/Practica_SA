@@ -116,21 +116,6 @@ public class Importadora {
     }
 
 
-    public String total(
-            @WebParam(name = "taller") String taller,
-            @WebParam(name = "sat") String sat,
-            @WebParam(name = "aduana") String aduana,
-            @WebParam(name = "envio") String envio,
-            @WebParam(name = "id_Vehiculo") String id_Vehiculo
-            
-    ) {
-        String respuesta ="",valor="";        
-        
-        valor=precio(id_Vehiculo);    
-        respuesta="{ \"precio_Vehiculo\":"+valor+", \"precio_Envio\":"+envio+", \"impuesto_Sat\":"+sat+", \"impuesto_Aduana\":"+aduana+", \"iva\":"+0+", \"isr\":"+0+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
-
-        return respuesta;
-    }
     
     
     boolean conexion(String nombre, String user, String pass, String tarj) {
@@ -211,36 +196,5 @@ public class Importadora {
 	         return respuesta;
     }
     
-    String precio(String id_Vehiculo) {
-        String respuesta="";
-
-        
-        try {
-            Class.forName("org.postgresql.Driver");
-	} catch (ClassNotFoundException e) {
-			System.out.println("Error!");
-			e.printStackTrace();
-	}
-
-
-		try {
-			conn = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/importadora", "postgres",
-					"1234");
-                        stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery( "SELECT precio_Vehiculo FROM vehiculo where id_Vehiculo='"+id_Vehiculo+"';" );
-                         while ( rs.next() ) {
-                            respuesta = rs.getString("id_Vehiculo");
-                         }
-                     
-                         rs.close();
-                         stmt.close();
-                         conn.close();                
-		} catch (SQLException e) {
-                     System.out.println("Error2");
-			e.printStackTrace();
-		}
-
-	         return respuesta;
-    }  
+  
 }
