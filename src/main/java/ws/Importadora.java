@@ -138,7 +138,7 @@ public class Importadora {
 					"1234");
                              bandera=true;
                              stmt = conn.createStatement();
-                                String sql = "INSERT INTO public.cliente (nombre,username,pass,no_Tarjeta) "
+                                String sql = "INSERT INTO cliente (nombre,username,pass,no_Tarjeta) "
                                     + "VALUES ('"+nombre+"', '"+user+"', '"+pass+"', '"+tarj+"');";
                                 stmt.executeUpdate(sql);
                             stmt.close();
