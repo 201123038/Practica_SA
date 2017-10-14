@@ -242,7 +242,7 @@ public class Importadora {
 		}
 
                 
-                return respuesta;
+                return cot;
     }
     void insert(Integer idc,String no_Tarjeta,Integer idv,String cot){
         try {
