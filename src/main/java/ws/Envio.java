@@ -277,7 +277,7 @@ public class Envio {
 		}
 
                 respuesta="{" +"\"linea\":\""+linea+"\"," +
-            "\"marca\":\""+marca+"\"" +"\"modelo\":"+modelo+"" +
+            "\"marca\":\""+marca+"\"," +"\"modelo\":"+modelo+"" +
             "}";
 	         return respuesta;
     }
