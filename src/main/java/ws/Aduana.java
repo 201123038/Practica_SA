@@ -43,7 +43,7 @@ public class Aduana {
         
         
         respuesta="{" +
-        "\"costo_Aduana\" : "+imp+"," +
+        "\"costo_Aduana\" : "+imp.toString()+"," +
         "\"status\":0," +
         "\"descripcion\":\"Exitoso\"" +
         "}";

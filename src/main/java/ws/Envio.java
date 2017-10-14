@@ -144,7 +144,7 @@ public class Envio {
 			e.printStackTrace();
 		}
 
-	         return respuesta;
+	         return catalogo;
     }
       String envio(String pais){
         String respuesta="";
@@ -187,21 +187,28 @@ public class Envio {
  
     
         public String total(
-            @WebParam(name = "taller") String taller,
-            @WebParam(name = "sat") String sat,
-            @WebParam(name = "aduana") String aduana,
-            @WebParam(name = "envio") String envio,
-            @WebParam(name = "id_Vehiculo") String id_Vehiculo
+            @WebParam(name = "taller") Integer taller,
+            @WebParam(name = "sat") Double sat,
+            @WebParam(name = "aduana") Double aduana,
+            @WebParam(name = "envio") Double envio,
+            @WebParam(name = "id_Vehiculo") Integer id_Vehiculo
             
     ) {
         String respuesta ="",valor="";        
+        Double iva=0.0, isr=0.0;
         
         valor=precio(id_Vehiculo);    
-        respuesta="{ \"precio_Vehiculo\":"+valor+", \"precio_Envio\":"+envio+", \"impuesto_Sat\":"+sat+", \"impuesto_Aduana\":"+aduana+", \"iva\":"+0+", \"isr\":"+0+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
+        isr=(Double.parseDouble(valor))*0.05;
+        iva=(Double.parseDouble(valor))*0.12;
+        
+        Double total=0.0;
+        total=taller+sat+aduana+envio+isr+iva;
+
+        respuesta="{ \"precio_Vehiculo\":"+valor+", \"precio_Envio\":"+envio.toString()+", \"impuesto_Sat\":"+sat.toString()+", \"impuesto_Aduana\":"+aduana.toString()+", \"iva\":"+iva.toString()+", \"isr\":"+isr.toString()+", \"total\":"+total.toString()+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
 
         return respuesta;
     }
-    String precio(String id_Vehiculo) {
+    String precio(Integer id_Vehiculo) {
         String respuesta="";
 
         
@@ -220,7 +227,7 @@ public class Envio {
                         stmt = conn.createStatement();
                         ResultSet rs = stmt.executeQuery( "SELECT precio_Vehiculo FROM vehiculo where id_Vehiculo='"+id_Vehiculo+"';" );
                          while ( rs.next() ) {
-                            respuesta = rs.getString("id_Vehiculo");
+                            respuesta = rs.getString("precio_Vehiculo");
                          }
                      
                          rs.close();
@@ -232,5 +239,43 @@ public class Envio {
 		}
 
 	         return respuesta;
-    }  
+    }
+    
+        String datos(Integer id_Vehiculo) {
+        String respuesta="",linea="",marca="",modelo="";
+        
+        
+        try {
+            Class.forName("org.postgresql.Driver");
+	} catch (ClassNotFoundException e) {
+			System.out.println("Error!");
+			e.printStackTrace();
+	}
+
+
+		try {
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/envios", "postgres",
+					"1234");
+                        stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery( "SELECT linea,marca,modelo FROM vehiculo where id_Vehiculo='"+id_Vehiculo+"';" );
+                         while ( rs.next() ) {
+                            linea = rs.getString("linea");
+                            marca = rs.getString("marca");
+                            modelo = rs.getString("modelo");
+                         }
+                     
+                         rs.close();
+                         stmt.close();
+                         conn.close();                
+		} catch (SQLException e) {
+                     System.out.println("Error2");
+			e.printStackTrace();
+		}
+
+                respuesta="{" +"\"linea\":'"+linea+"'," +
+            "\"marca\":\"'"+marca+"'\"" +"\"modelo\":"+modelo+"" +
+            "}";
+	         return respuesta;
+    }
 }

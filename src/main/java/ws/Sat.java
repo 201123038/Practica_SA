@@ -29,6 +29,7 @@ public class Sat {
             @WebParam(name = "linea") String linea,
             @WebParam(name = "marca") String marca,
             @WebParam(name = "modelo") Integer modelo
+
                ) {
         
         String respuesta="", valor="";
@@ -39,7 +40,7 @@ public class Sat {
         imp=v1+(1000/(2017-modelo+1))+1000;
         
                 respuesta="{" +
-        "\"valor\" : "+v1+"," +
+        "\"valor\" : "+v1.toString()+"," +
         "\"status\":0," +
         "\"descripcion\":\"Exitoso\"" +
         "}";        
