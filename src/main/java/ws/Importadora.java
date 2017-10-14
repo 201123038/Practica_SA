@@ -207,7 +207,7 @@ public class Importadora {
         String cotizacion=cotizacion(id_Vehiculo.toString());
         insert(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacion);
         respuesta=factura(id_Vehiculo.toString(),cotizacion);    
-
+//respuesta
         return respuesta;
     }
 
