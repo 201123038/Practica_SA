@@ -276,8 +276,8 @@ public class Envio {
 			e.printStackTrace();
 		}
 
-                respuesta="{" +"\"linea\":"+linea+"," +
-            "\"marca\":"+marca+"" +"\"modelo\":"+modelo+"" +
+                respuesta="{" +"\"linea\":\""+linea+"\"," +
+            "\"marca\":\""+marca+"\"" +"\"modelo\":"+modelo+"" +
             "}";
 	         return respuesta;
     }
