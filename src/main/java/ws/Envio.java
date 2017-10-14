@@ -204,6 +204,8 @@ public class Envio {
         Double total=0.0;
         total=taller+sat+aduana+envio+isr+iva;
 
+        guardar(total,id_Vehiculo);
+        
         respuesta="{ \"precio_Vehiculo\":"+valor+", \"precio_Envio\":"+envio.toString()+", \"impuesto_Sat\":"+sat.toString()+", \"impuesto_Aduana\":"+aduana.toString()+", \"iva\":"+iva.toString()+", \"isr\":"+isr.toString()+", \"total\":"+total.toString()+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
 
         return respuesta;
@@ -278,4 +280,39 @@ public class Envio {
             "}";
 	         return respuesta;
     }
+
+void guardar(Double total, Integer id_Vehiculo) {
+    String respuesta="";
+    try {
+			Class.forName("org.postgresql.Driver");
+
+		} catch (ClassNotFoundException e) {
+
+			System.out.println("Error!");
+			e.printStackTrace();
+
+		}
+
+
+		try {
+
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/importadora", "postgres",
+					"1234");
+                             stmt = conn.createStatement();
+                                String sql = "INSERT INTO cotizacion (id_Vehiculo,total) "
+                                    + "VALUES ("+id_Vehiculo+", "+total+");";
+                                stmt.executeUpdate(sql);
+                            stmt.close();
+                              conn.commit();
+                              conn.close();                
+		} catch (SQLException e) {
+
+			System.out.println("Error2");
+			e.printStackTrace();
+
+		}
+
+}
+
 }
