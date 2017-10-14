@@ -108,10 +108,10 @@ public class Envio {
                          while ( rs.next() ) {
                             idv = rs.getString("id_Vehiculo");
                             marca = rs.getString("marca");
-                            marca = rs.getString("linea");
-                            marca = rs.getString("modelo");
-                            marca = rs.getString("pais_Origen");
-                            marca = rs.getString("precio_Vehiculo");
+                            linea = rs.getString("linea");
+                            modelo = rs.getString("modelo");
+                            paiso = rs.getString("pais_Origen");
+                            precio = rs.getString("precio_Vehiculo");
 
                         catalogo+= "  {\"id_Vehiculo\":"+idv+","
                             + "\"marca\":\""+marca+"\", "
