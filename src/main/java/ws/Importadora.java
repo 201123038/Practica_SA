@@ -314,4 +314,37 @@ public class Importadora {
                 return respuesta;
     }
 
+    String linea="",marca="";
+    Integer modelo=0;
+    Double valor=0.0;
+    @WebMethod(operationName = "cotizar_Vehiculo2")
+    public String cotizar_Vehiculo2(@WebParam(name = "id_Vehiculo") Integer id_Vehiculo,
+                                   @WebParam(name = "pais_Destino") String pais_Destino) {
+        String respuesta ="";        
+        
+        //cotizacion tallen en bd importadora
+        //JSON catalogo cotizaciones de bd
+//        String  marca ="", pais_Origen="",precio_Vehiculo="",status="",descripcion="", precio_envio="",sat="", aduana="", iva="", isr="";
+        Integer valor=300;
+                        respuesta="{" +
+        "\"valor\" : 300," +
+        "\"status\":0," +
+        "\"descripcion\":\"Exitoso\"" +
+        "}";    
+         Envio e = new Envio();
+         e.datos(id_Vehiculo);
+         Sat s = new Sat();
+         Double sa=Double.parseDouble(s.calcular_Impuesto(linea, marca, modelo));
+         Aduana a = new Aduana();
+                 Double ad=Double.parseDouble(a.calcular_Costo_Aduana(marca, linea, modelo));
+         
+/*         Double.calcular_costo_viaje(id_Vehiculo, "Guatemala");
+         e.total(valor, sa, ad, en, id_Vehiculo);
+         */
+//        respueta="{ \"precio_Vehiculo\":"+precio_Vehiculo+", \"precio_Envio\":"+precio_envio+", \"impuesto_Sat\":"+sat+", \"impuesto_Aduana\":"+aduana+", \"iva\":"+iva+", \"isr\":"+isr+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
+
+        return respuesta;
+    }
+
+    
 }
