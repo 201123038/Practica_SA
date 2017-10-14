@@ -196,5 +196,122 @@ public class Importadora {
 	         return respuesta;
     }
     
-  
+   @WebMethod(operationName = "comprar_Vehiculo2")
+    public String comprar_Vehiculo2(
+            @WebParam(name = "id_Cliente") Integer id_Cliente,
+            @WebParam(name = "no_Tarjeta") String no_Tarjeta,
+            @WebParam(name = "id_Vehiculo") Integer id_Vehiculo
+            ) {
+        Integer factura=0;
+        String respuesta="", serie="";//JSON
+        String cotizacion=cotizacion(id_Vehiculo.toString());
+        insert(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacion);
+        respuesta=factura(id_Vehiculo.toString(),cotizacion);    
+
+        return respuesta;
+    }
+
+
+    String cotizacion(String id_vehiculo) {
+        String respuesta="",cot="";
+        
+        try {
+            Class.forName("org.postgresql.Driver");
+	} catch (ClassNotFoundException e) {
+			System.out.println("Error!");
+			e.printStackTrace();
+	}
+
+
+		try {
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/importadora", "postgres",
+					"1234");
+                        stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery( "SELECT total FROM cotizacion where id_Vehiculo="+id_vehiculo+";" );
+                         while ( rs.next() ) {
+                            cot = rs.getString("total");
+                         }
+                     
+                         rs.close();
+                         stmt.close();
+                         conn.close();                
+		} catch (SQLException e) {
+                     System.out.println("Error2");
+			e.printStackTrace();
+		}
+
+                
+                return respuesta;
+    }
+    void insert(Integer idc,String no_Tarjeta,Integer idv,String cot){
+        try {
+			Class.forName("org.postgresql.Driver");
+
+		} catch (ClassNotFoundException e) {
+
+			System.out.println("Error!");
+			e.printStackTrace();
+
+		}
+
+
+		try {
+
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/importadora", "postgres",
+					"1234");
+                             stmt = conn.createStatement();
+                                String sql = "INSERT INTO transaccion (id_Cliente,no_Tarjeta,id_Vehiculo,total) "
+                                    + "VALUES ("+idc+", '"+no_Tarjeta+"', "+idv+", "+cot+");";
+                                stmt.executeUpdate(sql);
+                            stmt.close();
+                              conn.commit();
+                              conn.close();                
+		} catch (SQLException e) {
+
+			System.out.println("Error2");
+			e.printStackTrace();
+
+		}  
+    }
+    String factura(String id_vehiculo,String cot) {
+        String respuesta="", serie="";
+        
+        try {
+            Class.forName("org.postgresql.Driver");
+	} catch (ClassNotFoundException e) {
+			System.out.println("Error!");
+			e.printStackTrace();
+	}
+
+
+		try {
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/importadora", "postgres",
+					"1234");
+                        stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery( "SELECT id_transaccion FROM transaccion where id_Vehiculo="+id_vehiculo+";" );
+                         while ( rs.next() ) {
+                            serie = rs.getString("id_transaccion");
+                         }
+                     
+                         rs.close();
+                         stmt.close();
+                         conn.close();                
+		} catch (SQLException e) {
+                     System.out.println("Error2");
+			e.printStackTrace();
+		}
+
+                    respuesta="{" +
+                "\"serie\" : \""+serie+"\"," +
+                "\"numero_Factura\" : \""+serie+"\" ," +
+               "\"total\" : \""+cot+"\" ," +
+                 "\"status\":0," +
+                "\"descripcion\":\"Exitoso\"" +
+                "}";
+                return respuesta;
+    }
+
 }
