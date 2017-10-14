@@ -243,7 +243,8 @@ public class Envio {
 	         return respuesta;
     }
     
-        String datos(Integer id_Vehiculo) {
+        public String total(
+            @WebParam(name = "id_Vehiculo") Integer id_Vehiculo){
         String respuesta="",linea="",marca="",modelo="";
         
         
