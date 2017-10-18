@@ -126,8 +126,8 @@ public class Envio {
                                 "\"status\":0," +
                                 "\"descripcion\":\"Exitoso\"" +
                                 "}";
-                        catalogo.replace("},]", "}]");
-                         
+              String replace = catalogo.replace("},]", "}]");
+                       catalogo=replace;  
                          rs.close();
                          stmt.close();
                          conn.close();                
