@@ -40,7 +40,7 @@ public class Sat {
         imp=v1+(1000/(2017-modelo+1))+1000;
         
                 respuesta="{" +
-        "\"valor\" : "+v1.toString()+"," +
+        "\"valor\" : "+imp.toString()+"," +
         "\"status\":0," +
         "\"descripcion\":\"Exitoso\"" +
         "}";        
