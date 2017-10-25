@@ -291,7 +291,6 @@ public class Envio {
 
 void guardar(Double total, Integer id_Vehiculo) {
     String respuesta="";
-           if(verificar_duplicado(id_Vehiculo.toString())==false){
     try {
 			Class.forName("org.postgresql.Driver");
 
@@ -321,7 +320,7 @@ void guardar(Double total, Integer id_Vehiculo) {
 			e.printStackTrace();
 
 		}
-           }
+           
 }
 
     @WebMethod(operationName = "transferir")
@@ -386,7 +385,6 @@ void guardar(Double total, Integer id_Vehiculo) {
                             cot = rs.getString("total");
                          b=true;
                          }
-                         b=true;
                          
                          rs.close();
                          stmt.close();
