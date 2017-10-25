@@ -264,6 +264,10 @@ public class Importadora {
                 return respuesta;
     }
     void insert(Integer idc,String no_Tarjeta,Integer idv,String cot){
+        if(verificar_duplicado(idv.toString())==true){
+            //ya existe 
+        }else{
+        
         try {
 			Class.forName("org.postgresql.Driver");
 
@@ -292,7 +296,8 @@ public class Importadora {
 			System.out.println("Error2");
 			e.printStackTrace();
 
-		}  
+		} 
+        }
     }
     String factura(String id_vehiculo,String cot) {
         String respuesta="", serie="";
@@ -448,5 +453,38 @@ public class Importadora {
     }
 
 
+    Boolean verificar_duplicado(String id_vehiculo) {
+        String respuesta="",cot="";
+            Boolean b=false;
+        try {
+            Class.forName("org.postgresql.Driver");
+	} catch (ClassNotFoundException e) {
+			System.out.println("Error!");
+			e.printStackTrace();
+	}
+
+
+		try {
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/importadora", "postgres",
+					"1234");
+                        stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery( "SELECT total FROM cotizacion where id_Vehiculo="+id_vehiculo+";" );
+                         while ( rs.next() ) {
+                            cot = rs.getString("total");
+                         b=true;
+                         }
+                         
+                         rs.close();
+                         stmt.close();
+                         conn.close();                
+		} catch (SQLException e) {
+                     System.out.println("Error2");
+			e.printStackTrace();
+		}
+
+                        
+                return b;
+    }
 
 }
