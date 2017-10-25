@@ -155,15 +155,15 @@ public class Importadora {
                                 stmt.executeUpdate(sql);
                             stmt.close();
                               conn.commit();
-                              conn.close();        
-                              cuenta(nombre,tarj);
+                              conn.close();       
 		} catch (SQLException e) {
 
 			System.out.println("Error2");
 			e.printStackTrace();
 
 		}
-                
+                 
+                              cuenta(nombre,tarj);
 	         return bandera;
     }
    
