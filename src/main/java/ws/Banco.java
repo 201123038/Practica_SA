@@ -53,7 +53,7 @@ public class Banco {
                 "\"descripcion\":\"Saldo insuficiente\"" +
                 "}";            
             }else{
-//                id_Transferencia= transferencia(no_Tarjeta,cuenta_destino,monto);
+                id_Transferencia= transferencia(no_Tarjeta,cuenta_destino,monto);
          
                respuesta="{" +
             "\"id_Transferecia\" : \""+id_Transferencia+"\"," +
@@ -111,7 +111,7 @@ public class Banco {
 
 		try {
 			conn = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/banco", "postgres",
+					"jdbc:postgresql://localhost:5432/importadora", "postgres",
 					"1234");
                              stmt = conn.createStatement();
                                 String sql = "INSERT INTO transferencia (cuenta_destino,no_Tarjeta,monto) "
