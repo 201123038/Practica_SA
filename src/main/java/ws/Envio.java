@@ -291,6 +291,7 @@ public class Envio {
 
 void guardar(Double total, Integer id_Vehiculo) {
     String respuesta="";
+           if(verificar_duplicado(id_Vehiculo.toString())==false){
     try {
 			Class.forName("org.postgresql.Driver");
 
@@ -320,7 +321,7 @@ void guardar(Double total, Integer id_Vehiculo) {
 			e.printStackTrace();
 
 		}
-
+           }
 }
 
     @WebMethod(operationName = "transferir")
@@ -363,6 +364,40 @@ void guardar(Double total, Integer id_Vehiculo) {
 
 		}
                 
+    }
+    Boolean verificar_duplicado(String id_vehiculo) {
+        String respuesta="",cot="";
+            Boolean b=false;
+        try {
+            Class.forName("org.postgresql.Driver");
+	} catch (ClassNotFoundException e) {
+			System.out.println("Error!");
+			e.printStackTrace();
+	}
+
+
+		try {
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/importadora", "postgres",
+					"1234");
+                        stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery( "SELECT total FROM cotizacion where id_Vehiculo="+id_vehiculo+";" );
+                         while ( rs.next() ) {
+                            cot = rs.getString("total");
+                         b=true;
+                         }
+                         b=true;
+                         
+                         rs.close();
+                         stmt.close();
+                         conn.close();                
+		} catch (SQLException e) {
+                     System.out.println("Error2");
+			e.printStackTrace();
+		}
+
+                        
+                return b;
     }
 
 }
