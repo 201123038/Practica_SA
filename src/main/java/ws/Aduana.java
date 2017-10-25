@@ -111,5 +111,46 @@ public class Aduana {
         
         return respuesta;
     }
+            @WebMethod(operationName = "transferir")
+    public String transferir(@WebParam(name = "id_transferencia") Integer id_transferencia,
+                                   @WebParam(name = "monto") Double monto) {
+        String respuesta ="";        
+
+        agregar_transferencia(id_transferencia,monto);
+        return respuesta;
+    }
+
+    void agregar_transferencia(Integer id, Double monto) {
+        try {
+			Class.forName("org.postgresql.Driver");
+
+		} catch (ClassNotFoundException e) {
+
+			System.out.println("Error!");
+			e.printStackTrace();
+
+		}
+
+
+		try {
+
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/aduana", "postgres",
+					"1234");
+                             stmt = conn.createStatement();
+                                String sql = "INSERT INTO transfer (id_transferencia,monto) "
+                                    + "VALUES ("+id+","+monto+");";
+                            stmt.executeUpdate(sql);
+                            stmt.close();
+                              conn.commit();
+                              conn.close();        
+                } catch (SQLException e) {
+
+			System.out.println("Error2");
+			e.printStackTrace();
+
+		}
+                
+    }
 
 }

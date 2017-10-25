@@ -203,11 +203,17 @@ public class Envio {
         iva=(Double.parseDouble(valor))*0.12;
         
         Double total=0.0;
-        total=taller+sat+aduana+envio+isr+iva;
+        total=taller+sat+aduana+envio+isr+iva;//TOTAL
 
         guardar(total,id_Vehiculo);
         
-        respuesta="{ \"precio_Vehiculo\":"+valor+", \"precio_Envio\":"+envio.toString()+", \"impuesto_Sat\":"+sat.toString()+", \"impuesto_Aduana\":"+aduana.toString()+", \"iva\":"+iva.toString()+", \"isr\":"+isr.toString()+", \"total\":"+total.toString()+", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
+        respuesta="{ \"precio_Vehiculo\":"+valor+
+                ", \"precio_Envio\":"+envio.toString()+
+                ", \"impuesto_Sat\":"+sat.toString()+
+                ", \"impuesto_Aduana\":"+aduana.toString()+
+                ", \"iva\":"+iva.toString()+
+                ", \"isr\":"+isr.toString()+
+                ", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
 
         return respuesta;
     }
@@ -316,5 +322,47 @@ void guardar(Double total, Integer id_Vehiculo) {
 		}
 
 }
+
+    @WebMethod(operationName = "transferir")
+    public String transferir(@WebParam(name = "id_transferencia") Integer id_transferencia,
+                                   @WebParam(name = "monto") Double monto) {
+        String respuesta ="";        
+
+        agregar_transferencia(id_transferencia,monto);
+        return respuesta;
+    }
+
+    void agregar_transferencia(Integer id, Double monto) {
+        try {
+			Class.forName("org.postgresql.Driver");
+
+		} catch (ClassNotFoundException e) {
+
+			System.out.println("Error!");
+			e.printStackTrace();
+
+		}
+
+
+		try {
+
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/envios", "postgres",
+					"1234");
+                             stmt = conn.createStatement();
+                                String sql = "INSERT INTO transfer (id_transferencia,monto) "
+                                    + "VALUES ("+id+","+monto+");";
+                            stmt.executeUpdate(sql);
+                            stmt.close();
+                              conn.commit();
+                              conn.close();        
+                } catch (SQLException e) {
+
+			System.out.println("Error2");
+			e.printStackTrace();
+
+		}
+                
+    }
 
 }

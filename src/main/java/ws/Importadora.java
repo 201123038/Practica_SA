@@ -89,7 +89,7 @@ public class Importadora {
         return respuesta;
     }
     
-     @WebMethod(operationName = "comprar_Vehículo")
+     @WebMethod(operationName = "comprar_Vehiculo")
     public String comprar_Vehiculo(
             @WebParam(name = "id_Cliente") Integer id_Cliente,
             @WebParam(name = "no_Tarjeta") String no_Tarjeta,
@@ -103,18 +103,30 @@ public class Importadora {
             @WebParam(name = "pais_Origen") String  pais_Origen ,
             @WebParam(name = "pais_Destino") String  pais_Destino
             ) {
-        Integer factura=0;
-        String respuesta="", serie="";//JSON
-            
-        respuesta="{" +
-                "\"serie\" : \""+serie+"\"," +
-                "\"numero_Factura\" : \""+factura+"\" ," +
-                "\"status\":0," +
-                "\"descripcion\":\"Exitoso\"" +
-                "}";
-        return respuesta;
+        String respuesta="";
+        
+        String cotizacion=cotizacion(id_Vehiculo.toString()); //suma
+
+
+        insert(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacion);
+        respuesta=factura(id_Vehiculo.toString(),cotizacion);    
+
+        
+        return cotizacion;
     }
 
+     @WebMethod(operationName = "facturar")
+    public String facturar(
+            @WebParam(name = "id_Vehiculo") Integer id_Vehiculo
+            ) {
+        String respuesta="";
+        
+        String cotizacion=cotizacion(id_Vehiculo.toString()); //suma
+
+        respuesta=factura(id_Vehiculo.toString(),cotizacion);    
+        
+        return respuesta;
+    }
 
     
     
@@ -143,17 +155,20 @@ public class Importadora {
                                 stmt.executeUpdate(sql);
                             stmt.close();
                               conn.commit();
-                              conn.close();                
+                              conn.close();        
+                              cuenta(nombre,tarj);
 		} catch (SQLException e) {
 
 			System.out.println("Error2");
 			e.printStackTrace();
 
 		}
-
+                
 	         return bandera;
     }
    
+    
+    
     String sesion(String user, String pass) {
         String respuesta="";
         String nombre="",no_tarjeta="";
@@ -202,8 +217,7 @@ public class Importadora {
             @WebParam(name = "no_Tarjeta") String no_Tarjeta,
             @WebParam(name = "id_Vehiculo") Integer id_Vehiculo
             ) {
-        Integer factura=0;
-        String respuesta="", serie="";//JSON
+        String respuesta="";//JSON
         String cotizacion=cotizacion(id_Vehiculo.toString());
         insert(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacion);
         respuesta=factura(id_Vehiculo.toString(),cotizacion);    
@@ -241,8 +255,13 @@ public class Importadora {
 			e.printStackTrace();
 		}
 
-                
-                return cot;
+                        respuesta="{" +
+        "\"valor\" : "+cot+"," +
+        "\"status\":0," +
+        "\"descripcion\":\"Exitoso\"" +
+        "}";        
+        
+                return respuesta;
     }
     void insert(Integer idc,String no_Tarjeta,Integer idv,String cot){
         try {
@@ -304,13 +323,21 @@ public class Importadora {
 			e.printStackTrace();
 		}
 
-                    respuesta="{" +
+                if(serie.equals("")){
+                                    respuesta="{" +
                 "\"serie\" : \""+serie+"\"," +
                 "\"numero_Factura\" : \""+serie+"\" ," +
-               "\"total\" : \""+cot+"\" ," +
                  "\"status\":0," +
-                "\"descripcion\":\"Exitoso\"" +
+                "\"descripcion\":\"Código de vehículo no encontrado\"" +
                 "}";
+                }else{    
+                respuesta="{" +
+                "\"serie\" : \""+serie+"\"," +
+                "\"numero_Factura\" : \""+serie+"\" ,"+
+                 "\"status\":0," +
+                "\"descripcion\":\"Exito\"" +
+                "}";
+                }
                 return respuesta;
     }
 
@@ -346,5 +373,80 @@ public class Importadora {
         return respuesta;
     }
 
-    
+    void cuenta(String nombre, String tarj) {
+        try {
+			Class.forName("org.postgresql.Driver");
+
+		} catch (ClassNotFoundException e) {
+
+			System.out.println("Error!");
+			e.printStackTrace();
+
+		}
+
+
+		try {
+
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/banco", "postgres",
+					"1234");
+                             stmt = conn.createStatement();
+                                String sql = "INSERT INTO cuenta (nombre,no_Tarjeta,saldo) "
+                                    + "VALUES ('"+nombre+"', '"+tarj+"', 50000);";
+                            stmt.executeUpdate(sql);
+                            stmt.close();
+                              conn.commit();
+                              conn.close();        
+                } catch (SQLException e) {
+
+			System.out.println("Error2");
+			e.printStackTrace();
+
+		}
+                
+    }
+    @WebMethod(operationName = "transferir")
+    public String transferir(@WebParam(name = "id_transferencia") Integer id_transferencia,
+                                   @WebParam(name = "monto") Double monto) {
+        String respuesta ="";        
+
+        agregar_transferencia(id_transferencia,monto);
+        return respuesta;
+    }
+
+    void agregar_transferencia(Integer id, Double monto) {
+        try {
+			Class.forName("org.postgresql.Driver");
+
+		} catch (ClassNotFoundException e) {
+
+			System.out.println("Error!");
+			e.printStackTrace();
+
+		}
+
+
+		try {
+
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/importadora", "postgres",
+					"1234");
+                             stmt = conn.createStatement();
+                                String sql = "INSERT INTO transfer (id_transferencia,monto) "
+                                    + "VALUES ("+id+","+monto+");";
+                            stmt.executeUpdate(sql);
+                            stmt.close();
+                              conn.commit();
+                              conn.close();        
+                } catch (SQLException e) {
+
+			System.out.println("Error2");
+			e.printStackTrace();
+
+		}
+                
+    }
+
+
+
 }
