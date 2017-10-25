@@ -105,14 +105,14 @@ public class Importadora {
             ) {
         String respuesta="";
         
-        String cotizacion=cotizacion(id_Vehiculo.toString()); //suma
+        String cotizacio=cotizacion(id_Vehiculo.toString()); //suma
 
 
-        insert(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacion);
-        respuesta=factura(id_Vehiculo.toString(),cotizacion);    
+        insert(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacio);
+ //       respuesta=factura(id_Vehiculo.toString(),cotizacion);    
 
         
-        return cotizacion;
+        return cotizacio;
     }
 
      @WebMethod(operationName = "facturar")

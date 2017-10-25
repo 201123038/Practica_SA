@@ -114,7 +114,7 @@ public class Banco {
 					"jdbc:postgresql://localhost:5432/importadora", "postgres",
 					"1234");
                              stmt = conn.createStatement();
-                                String sql = "INSERT INTO transferencia (cuenta_destino,no_Tarjeta,monto) "
+                                String sql = "INSERT INTO transaccion (cuenta_destino,no_Tarjeta,monto) "
                                     + "VALUES ('"+cuenta+"', '"+tarjeta+"',"+monto+");";
                                 stmt.executeUpdate(sql);
                             stmt.close();
