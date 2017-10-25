@@ -282,7 +282,7 @@ public class Importadora {
 					"jdbc:postgresql://localhost:5432/importadora", "postgres",
 					"1234");
                              stmt = conn.createStatement();
-                                String sql = "INSERT INTO transaccion (id_Cliente,no_Tarjeta,id_Vehiculo,total) "
+                                String sql = "INSERT INTO transaccion (id_cliente,no_tarjeta,id_vehiculo,total) "
                                     + "VALUES ("+idc+", '"+no_Tarjeta+"', "+idv+", "+cot+");";
                                 stmt.executeUpdate(sql);
                             stmt.close();
