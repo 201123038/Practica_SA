@@ -53,7 +53,7 @@ public class Banco {
                 "\"descripcion\":\"Saldo insuficiente\"" +
                 "}";            
             }else{
-                id_Transferencia= transferencia(no_Tarjeta,cuenta_destino,monto);
+//                id_Transferencia= transferencia(no_Tarjeta,cuenta_destino,monto);
          
                respuesta="{" +
             "\"id_Transferecia\" : \""+id_Transferencia+"\"," +
