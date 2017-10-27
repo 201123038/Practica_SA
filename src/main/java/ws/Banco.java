@@ -38,7 +38,7 @@ public class Banco {
         Double saldo_cuenta= 0.00;
         if(total_saldo.equals("")){
             respuesta="{" +
-            "\"valor\" : \"\"," +
+            "\"id\" : \"\"," +
             "\"status\":1," +
             "\"descripcion\":\"Cuenta inexistente\"" +
             "}";
@@ -48,7 +48,7 @@ public class Banco {
             
             if(saldo_cuenta<monto){
                 respuesta="{" +
-                "\"valor\" : \"\"," +
+                "\"id\" : \"\"," +
                 "\"status\":1," +
                 "\"descripcion\":\"Saldo insuficiente\"" +
                 "}";            
@@ -56,7 +56,7 @@ public class Banco {
                 id_Transferencia= transferencia(no_Tarjeta,cuenta_destino,monto);
          
                respuesta="{" +
-            "\"valor\": "+id_Transferencia+"," +
+            "\"id\": "+id_Transferencia+"," +
             "\"status\":0," +
             "\"descripcion\":\"Transferencia exitosa\"" +
             "}";
