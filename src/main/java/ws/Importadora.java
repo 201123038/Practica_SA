@@ -108,11 +108,11 @@ public class Importadora {
         String cotizacio=cotizacion(id_Vehiculo.toString()); //suma
 
 
-        insertar(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacio);
+        respuesta=insertar(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacio);
  //       respuesta=factura(id_Vehiculo.toString(),cotizacion);    
 
         
-        return cotizacio;
+        return respuesta;
     }
 
      @WebMethod(operationName = "facturar")
@@ -144,7 +144,6 @@ public class Importadora {
 
 
 		try {
-
 			conn = DriverManager.getConnection(
 					"jdbc:postgresql://localhost:5432/importadora", "postgres",
 					"1234");
@@ -152,6 +151,7 @@ public class Importadora {
                              stmt = conn.createStatement();
                                 String sql = "INSERT INTO cliente (nombre,username,pass,no_Tarjeta) "
                                     + "VALUES ('"+nombre+"', '"+user+"', '"+pass+"', '"+tarj+"');";
+                             
                                 stmt.executeUpdate(sql);
                             stmt.close();
                               conn.commit();
@@ -263,8 +263,8 @@ public class Importadora {
         
                 return respuesta;
     }
-    void insertar(Integer idc,String no_Tarjeta,Integer idv,String cot){
-        
+    String insertar(Integer idc,String no_Tarjeta,Integer idv,String cot){
+        String resp="";
         try {
 			Class.forName("org.postgresql.Driver");
 
@@ -277,12 +277,14 @@ public class Importadora {
 
 
 		try {
-
+                        
 			conn = DriverManager.getConnection(
 					"jdbc:postgresql://localhost:5432/importadora", "postgres",
 					"1234");
                              stmt = conn.createStatement();
-                                String sql = "INSERT INTO transaccion (id_cliente,no_tarjeta,id_vehiculo,total) "
+                                     resp ="cliente ="+idc+" tarjeta "+no_Tarjeta+" vehiculo "+idv+" total "+cot;
+
+                             String sql = "INSERT INTO transaccion (id_cliente,no_tarjeta,id_vehiculo,total) "
                                     + "VALUES ("+idc+", '"+no_Tarjeta+"', "+idv+", "+cot+");";
                                 stmt.executeUpdate(sql);
                             stmt.close();
@@ -294,7 +296,7 @@ public class Importadora {
 			e.printStackTrace();
 
 		} 
-        
+        return resp;
     }
     String factura(String id_vehiculo,String cot) {
         String respuesta="", serie="";
