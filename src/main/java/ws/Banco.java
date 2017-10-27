@@ -144,9 +144,9 @@ public class Banco {
 					"jdbc:postgresql://localhost:5432/banco", "postgres",
 					"1234");
                         stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery( "SELECT id_transferencia FROM transferencia where no_Tarjeta='"+tarjeta+"' and monto="+monto+";" );
+                        ResultSet rs = stmt.executeQuery( "SELECT id_transaccion FROM transferencia where no_Tarjeta='"+tarjeta+"' and id_vehiculo="+monto+";" );
                          while ( rs.next() ) {
-                            valor = rs.getString("id_transferencia");
+                            valor = rs.getString("id_transaccion");
                          }
                      
                          rs.close();
