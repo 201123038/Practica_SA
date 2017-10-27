@@ -109,7 +109,7 @@ public class Importadora {
 
 
         respuesta=insertar(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacio);
- //       respuesta=factura(id_Vehiculo.toString(),cotizacion);    
+        respuesta=factura(id_Vehiculo.toString(),cotizacio);    
 
         
         return respuesta;
@@ -255,13 +255,13 @@ public class Importadora {
 			e.printStackTrace();
 		}
 
-                        respuesta="{" +
+        /*                respuesta="{" +
         "\"valor\" : "+cot+"," +
         "\"status\":0," +
         "\"descripcion\":\"Exitoso\"" +
         "}";        
-        
-                return respuesta;
+        */
+                return cot;
     }
     String insertar(Integer idc,String no_Tarjeta,Integer idv,String cot){
         String resp="";
@@ -314,9 +314,9 @@ public class Importadora {
 					"jdbc:postgresql://localhost:5432/importadora", "postgres",
 					"1234");
                         stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery( "SELECT id_transaccion FROM transaccion where id_Vehiculo="+id_vehiculo+";" );
+                        ResultSet rs = stmt.executeQuery( "SELECT total FROM transaccion where id_Vehiculo="+id_vehiculo+";" );
                          while ( rs.next() ) {
-                            serie = rs.getString("id_transaccion");
+                            serie = rs.getString("total");
                          }
                      
                          rs.close();
@@ -326,7 +326,7 @@ public class Importadora {
                      System.out.println("Error2");
 			e.printStackTrace();
 		}
-
+/*
                 if(serie.equals("")){
                                     respuesta="{" +
                 "\"serie\" : \""+serie+"\"," +
@@ -341,7 +341,13 @@ public class Importadora {
                  "\"status\":0," +
                 "\"descripcion\":\"Exito\"" +
                 "}";
-                }
+                }*/
+
+        respuesta="{" +
+        "\"valor\" : "+serie+"," +
+        "\"status\":0," +
+        "\"descripcion\":\"Exitoso\"" +
+        "}";    
                 return respuesta;
     }
 
