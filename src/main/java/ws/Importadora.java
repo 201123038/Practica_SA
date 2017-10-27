@@ -108,7 +108,7 @@ public class Importadora {
         String cotizacio=cotizacion(id_Vehiculo.toString()); //suma
 
 
-        insert(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacio);
+        insertar(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacio);
  //       respuesta=factura(id_Vehiculo.toString(),cotizacion);    
 
         
@@ -219,7 +219,7 @@ public class Importadora {
             ) {
         String respuesta="";//JSON
         String cotizacion=cotizacion(id_Vehiculo.toString());
-        insert(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacion);
+        insertar(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacion);
         respuesta=factura(id_Vehiculo.toString(),cotizacion);    
 //respuesta
         return respuesta;
@@ -263,7 +263,7 @@ public class Importadora {
         
                 return respuesta;
     }
-    void insert(Integer idc,String no_Tarjeta,Integer idv,String cot){
+    void insertar(Integer idc,String no_Tarjeta,Integer idv,String cot){
         
         try {
 			Class.forName("org.postgresql.Driver");
@@ -449,6 +449,74 @@ public class Importadora {
                 
     }
 
+@WebMethod(operationName = "cargar_Vehiculos")
+    public String cargar_Vehiculos(){        
+        String catalogo = "";
+        
+        catalogo=vehiculos();
+                
+        return catalogo;
+    }
+
+      String vehiculos() {
+          String catalogo="",idv="", marca="", linea="", modelo="", paiso="",precio="", respuesta="";
+                try {
+                    Class.forName("org.postgresql.Driver");
+                } catch (ClassNotFoundException e) {
+                                System.out.println("Error!");
+                                e.printStackTrace();
+                }
+
+		try {
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/envios", "postgres",
+					"1234");
+                        stmt = conn.createStatement();
+                        catalogo="{"+"\"vehiculos\":[ ";
+
+                        ResultSet rs = stmt.executeQuery( "SELECT * FROM vehiculo; ");
+                         while ( rs.next() ) {
+                            idv = rs.getString("id_Vehiculo");
+                            marca = rs.getString("marca");
+                            linea = rs.getString("linea");
+                            modelo = rs.getString("modelo");
+                            paiso = rs.getString("pais_Origen");
+                            precio = rs.getString("precio_Vehiculo");
+
+                        catalogo+= "  {\"id_Vehiculo\":"+idv+","
+                            + "\"marca\":\""+marca+"\", "
+                            + "\"linea\":\""+linea+"\","
+                            + "\"modelo\":"+modelo+","
+                            + "\"pais_Origen\":\""+paiso+"\","
+                            + "\"precio_Vehiculo\":"+precio+"},";         
+                            idv="";marca=""; linea=""; modelo=""; paiso="";precio="";
+        
+                         } 
+                        catalogo+="]," +
+                                "\"status\":0," +
+                                "\"descripcion\":\"Exitoso\"" +
+                                "}";
+              
+                        String replace = catalogo.replace("},]", "}]");
+                       catalogo=replace;  
+                         rs.close();
+                         stmt.close();
+                         conn.close();                
+		} catch (SQLException e) {
+
+                            //sino
+                     catalogo="{" +
+                         "\"vehiculos\":[ " +
+                         "]," +
+                         "\"status\":1," +
+                         "\"descripcion\":\"Error con la conexión a la BD de Envios\"" +
+                         "}";
+                    System.out.println("Error2");
+			e.printStackTrace();
+		}
+
+	         return catalogo;
+    }
 
 
 }
