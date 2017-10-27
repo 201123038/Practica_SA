@@ -111,10 +111,10 @@ public class Banco {
 
 		try {
 			conn = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/importadora", "postgres",
+					"jdbc:postgresql://localhost:5432/banco", "postgres",
 					"1234");
                              stmt = conn.createStatement();
-                                String sql = "INSERT INTO transaccion (cuenta_destino,no_Tarjeta,monto) "
+                                String sql = "INSERT INTO transferencia (cuenta_destino,no_tarjeta,monto) "
                                     + "VALUES ('"+cuenta+"', '"+tarjeta+"',"+monto+");";
                                 stmt.executeUpdate(sql);
                             stmt.close();
@@ -143,9 +143,9 @@ public class Banco {
 					"jdbc:postgresql://localhost:5432/banco", "postgres",
 					"1234");
                         stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery( "SELECT id_transaccion FROM transaccion where no_Tarjeta='"+tarjeta+"' and total="+monto+";" );
+                        ResultSet rs = stmt.executeQuery( "SELECT id_transferencia FROM transferencia where no_tarjeta='"+tarjeta+"' and monto="+monto+";" );
                          while ( rs.next() ) {
-                            valor = rs.getString("id_transaccion");
+                            valor = rs.getString("id_transferencia");
                          }
                      
                          rs.close();
