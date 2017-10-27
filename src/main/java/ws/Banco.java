@@ -65,7 +65,6 @@ public class Banco {
             
         }
                 
-        respuesta = "id "+id_Transferencia+" cuenta "+cuenta_destino+" monto "+monto+" dinero "+total_saldo;
         return respuesta;
     }
     
@@ -144,7 +143,7 @@ public class Banco {
 					"jdbc:postgresql://localhost:5432/banco", "postgres",
 					"1234");
                         stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery( "SELECT id_transaccion FROM transferencia where no_Tarjeta='"+tarjeta+"';" );
+                        ResultSet rs = stmt.executeQuery( "SELECT id_transaccion FROM transaccion where no_Tarjeta='"+tarjeta+"' and total="+monto+";" );
                          while ( rs.next() ) {
                             valor = rs.getString("id_transaccion");
                          }
