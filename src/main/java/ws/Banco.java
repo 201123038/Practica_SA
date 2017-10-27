@@ -65,6 +65,7 @@ public class Banco {
             
         }
                 
+        respuesta = "id "+id_Transferencia+" cuenta "+cuenta_destino+" monto "+monto+" dinero "+total_saldo;
         return respuesta;
     }
     
