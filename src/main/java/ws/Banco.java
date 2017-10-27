@@ -56,7 +56,7 @@ public class Banco {
                 id_Transferencia= transferencia(no_Tarjeta,cuenta_destino,monto);
          
                respuesta="{" +
-            "\"valor\" : "+id_Transferencia+"," +
+            "\"valor\": "+id_Transferencia+"," +
             "\"status\":0," +
             "\"descripcion\":\"Transferencia exitosa\"" +
             "}";
