@@ -123,7 +123,7 @@ public class Importadora {
         
         String cotizacion=cotizacion(id_Vehiculo.toString()); //suma
 
-        respuesta=factura(id_Vehiculo.toString(),cotizacion);    
+        respuesta=factura2(id_Vehiculo.toString(),cotizacion);    
         
         return respuesta;
     }
@@ -350,6 +350,56 @@ public class Importadora {
         "}";    
                 return respuesta;
     }
+
+
+    String factura2(String id_vehiculo,String cot) {
+        String respuesta="", serie="";
+        
+        try {
+            Class.forName("org.postgresql.Driver");
+	} catch (ClassNotFoundException e) {
+			System.out.println("Error!");
+			e.printStackTrace();
+	}
+
+
+		try {
+			conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/importadora", "postgres",
+					"1234");
+                        stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery( "SELECT id_transaccion FROM transaccion where id_Vehiculo="+id_vehiculo+";" );
+                         while ( rs.next() ) {
+                            serie = rs.getString("id_transaccion");
+                         }
+                     
+                         rs.close();
+                         stmt.close();
+                         conn.close();                
+		} catch (SQLException e) {
+                     System.out.println("Error2");
+			e.printStackTrace();
+		}
+
+                if(serie.equals("")){
+                                    respuesta="{" +
+                "\"serie\" : \""+serie+"\"," +
+                "\"numero_Factura\" : \""+serie+"\" ," +
+                 "\"status\":0," +
+                "\"descripcion\":\"Código de vehículo no encontrado\"" +
+                "}";
+                }else{    
+                respuesta="{" +
+                "\"serie\" : \""+serie+"\"," +
+                "\"numero_Factura\" : \""+serie+"\" ,"+
+                 "\"status\":0," +
+                "\"descripcion\":\"Exito\"" +
+                "}";
+                }
+
+                return respuesta;
+    }
+
 
     String linea="",marca="";
     Integer modelo=0;
