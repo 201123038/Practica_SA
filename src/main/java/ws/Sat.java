@@ -203,7 +203,8 @@ public class Sat {
         return respuesta;
     }
 
-        void agregar_transferencia(Integer id, Double monto) {
+    @WebMethod(operationName = "agregar_transferencia")
+    public void agregar_transferencia(Integer id, Double monto) {
         try {
 			Class.forName("org.postgresql.Driver");
 
