@@ -344,7 +344,7 @@ public class Importadora {
                 }*/
 
         respuesta="{" +
-        "\"valor\" : "+serie+"," +
+        "\"valor\":"+serie+"," +
         "\"status\":0," +
         "\"descripcion\":\"Exitoso\"" +
         "}";    
