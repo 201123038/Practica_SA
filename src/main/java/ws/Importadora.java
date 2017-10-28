@@ -202,10 +202,10 @@ public class Importadora {
 		}
 
                     if(!(no_tarjeta.equals(""))){
-                           respuesta="{  \"nombre\":\""+nombre+"\",  \"no_tarjeta\":\""+no_tarjeta+"\",  \"status\":0,  \"descripcion\":\"validacion correcta\" }";
+                           respuesta="{  \"nombre\":\""+nombre+"\",  \"no_Tarjeta\":\""+no_tarjeta+"\",  \"status\":0,  \"descripcion\":\"validacion correcta\" }";
         
                     }else{
-                       respuesta="{  \"nombre\":\"\",  \"no_tarjeta\":\"\",  \"status\":1,  \"descripcion\":\"usuario o password no validos\" }";
+                       respuesta="{  \"nombre\":\"\",  \"no_Tarjeta\":\"\",  \"status\":1,  \"descripcion\":\"usuario o password no validos\" }";
 			
                     }
 	         return respuesta;
