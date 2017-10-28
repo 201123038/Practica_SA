@@ -213,6 +213,7 @@ public class Envio {
                 ", \"impuesto_Aduana\":"+aduana.toString()+
                 ", \"iva\":"+iva.toString()+
                 ", \"isr\":"+isr.toString()+
+                ", \"taller\":300.00"+
                 ", \"status\":0,  \"descripcion\":\"Calculos realizados exitosamente\" }";
 
         return respuesta;
