@@ -207,7 +207,7 @@ public class Envio {
 
         guardar(total,id_Vehiculo);
         Double vall=0.0+Double.parseDouble(valor);
-        respuesta="{ \"precio_Vehiculo\":"+valor+
+        respuesta="{ \"precio_Vehiculo\":"+vall.toString()+
                 ", \"precio_Envio\":"+envio.toString()+
                 ", \"impuesto_Sat\":"+sat.toString()+
                 ", \"impuesto_Aduana\":"+aduana.toString()+
