@@ -91,7 +91,7 @@ public class Importadora {
     
      @WebMethod(operationName = "comprar_Vehiculo")
     public String comprar_Vehiculo(
-            @WebParam(name = "id_Cliente") Integer id_Cliente,
+            @WebParam(name = "username") String id_Cliente,
             @WebParam(name = "no_Tarjeta") String no_Tarjeta,
             @WebParam(name = "id_Vehiculo") Integer id_Vehiculo,
             @WebParam(name = "precio_Vehiculo") Double precio_Vehiculo,
@@ -108,7 +108,7 @@ public class Importadora {
         String cotizacio=cotizacion(id_Vehiculo.toString()); //suma
 
 
-        respuesta=insertar(id_Cliente,no_Tarjeta,id_Vehiculo,cotizacio);
+        respuesta=insertar(1,no_Tarjeta,id_Vehiculo,cotizacio);
         respuesta=factura(id_Vehiculo.toString(),cotizacio);    
 
         
